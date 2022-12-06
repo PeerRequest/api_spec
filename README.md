@@ -49,7 +49,6 @@ npm run preview
 The server starts on http://127.0.0.1:8080.
 
 The site is generated with [ReDoc](https://github.com/Redocly/redoc).
-Here's a preview of a site generated with this command: [Swagger Petstore Reference Documentation](https://dgarcia360.github.io/openapi-boilerplate/).
 
 ## Workflows
 
