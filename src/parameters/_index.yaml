@@ -1,7 +1,9 @@
 # path
-petId:
-  $ref: './path/petId.yaml'
+category_id:
+  $ref: './path/category_id.yaml'
+entry_id:
+  $ref: './path/entry_id.yaml'
 
-# limit
+# query
 limit:
   $ref: './query/limit.yaml'
