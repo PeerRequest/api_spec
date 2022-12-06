@@ -1,23 +1,13 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Swagger Petstore
-  description: Multi-file boilerplate for OpenAPI Specification.
-  license:
-    name: MIT
-  contact:
-    name: API Support
-    url: http://www.example.com/support
-    email: support@example.com
-servers:
-  - url: http://petstore.swagger.io/v1
-tags:
-  - name: pets
+  title: PeerRequest API
+  description: PeerRequest Open API Specification.
+  #servers:
+  # TODO: add servers here
 paths:
-  /pets:
-    $ref: "./resources/pets.yaml"
-  /pets/{petId}:
-    $ref: "./resources/pet.yaml"
+# TODO: add paths here
+
 components:
   parameters:
     $ref: "./parameters/_index.yaml"
