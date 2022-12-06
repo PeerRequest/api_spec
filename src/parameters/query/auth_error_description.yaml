@@ -1,0 +1,6 @@
+name: error_description
+in: query
+description: contains an error description
+required: false
+schema:
+  type: string

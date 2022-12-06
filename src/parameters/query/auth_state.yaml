@@ -1,0 +1,6 @@
+name: state
+in: query
+description: auth state returned by an auth server
+required: true
+schema:
+  type: string

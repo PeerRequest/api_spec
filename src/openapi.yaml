@@ -6,7 +6,17 @@ info:
   #servers:
   # TODO: add servers here
 paths:
-# TODO: add paths here
+  # /auth endpoints
+  /auth/logout:
+    $ref: "./paths/auth/logout.yaml"
+
+  /auth/login:
+    $ref: "./paths/auth/login.yaml"
+
+  /auth/callback:
+    $ref: "./paths/auth/callback.yaml"
+
+  # TODO: add paths here
 
 components:
   parameters:
