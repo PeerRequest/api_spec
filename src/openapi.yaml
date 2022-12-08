@@ -23,8 +23,17 @@ paths:
   /categories/{category_id}/entries/{entry_id}:
     $ref: "./paths/categories/category_id/entry.yaml"
 
+  /categories/{category_id}/entries/create:
+    $ref: "./paths/categories/category_id/createEntry.yaml"
+
   /categories/{category_id}/entries/{entry_id}/paper:
     $ref: "./paths/categories/category_id/entry_id/paper.yaml"
+  
+  /categories/{category_id}/entries/{entry_id}/edit:
+    $ref: "./paths/categories/category_id/entry_id/edit.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/delete:
+    $ref: "./paths/categories/category_id/entry_id/delete.yaml"
 
 # TODO: add paths here
 
