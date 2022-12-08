@@ -1,0 +1,29 @@
+get:
+  tags:
+    - categories
+    - entries
+  description: "Returns all entries in a category"
+  summary: "/categories/<category_id>/entries"
+  parameters:
+    - $ref: "../../../parameters/path/category_id.yaml"
+    - $ref: "../../../parameters/query/limit.yaml"
+    - $ref: "../../../parameters/query/after.yaml"
+
+  responses:
+    200:
+      description: "List of entries of the specified category"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../../schemas/entry.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category does not exist"
