@@ -5,7 +5,7 @@
 1. Clone the repository.
 
     ```
-    git clone https://github.com/dgarcia360/openapi-boilerplate.git
+    git clone https://github.com/PeerRequest/api_spec
     ```
 
 2. Install the project dependencies.
