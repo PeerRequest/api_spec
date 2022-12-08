@@ -31,6 +31,13 @@ components:
         default: 100
         type: integer
         format: int32
+    after:
+      name: after
+      in: query
+      description: entity id of last entity from last page
+      required: false
+      schema:
+        type: integer
   schemas:
     Error:
       type: object
@@ -43,6 +50,102 @@ components:
           format: int32
         message:
           type: string
+    Entry:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        title:
+          type: string
+          example: 'Great Paper #01'
+        researcher_id:
+          type: integer
+          example: 100
+        researcher_name:
+          type: string
+          example: Karol Bender
+        category_id:
+          type: integer
+          example: 5
+        slots:
+          type: integer
+          example: 2
+          nullable: true
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        type:
+          type: string
+          enum:
+            - Internal
+            - External
+        year:
+          type: integer
+          example: 2023
+        deadline:
+          type: string
+          example: 'Tue, 29. Nov 2022'
+          format: 'ddd, dd. mmm yyyy'
+        title:
+          type: string
+          example: International Paper Conference
+        researcher_id:
+          type: integer
+          example: 100
+        researcher_name:
+          type: string
+          example: Karol Bender
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        name:
+          type: string
+          example: Roosevelt Booth
+        email:
+          type: string
+          example: roosevelt.booth@example.org
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+        entry_id:
+          type: integer
+          example: 100
+        entry:
+          anyOf:
+            - $ref: '#/components/schemas/Entry'
+            - type: object
+              nullable: true
+        researcher_id:
+          type: integer
+          example: 100
+        researcher:
+          anyOf:
+            - $ref: '#/components/schemas/User'
+            - type: object
+              nullable: true
+        reviewer_id:
+          type: integer
+          example: 200
+        reviewer:
+          anyOf:
+            - $ref: '#/components/schemas/User'
+            - type: object
+              nullable: true
+        estimated_time:
+          description: Time when the reviewer thinks they have finished the review
+          type: string
+          example: 'Tue, 29. Nov 2022'
+          format: 'ddd, dd. mmm yyyy'
   responses:
     UnexpectedError:
       description: unexpected error
