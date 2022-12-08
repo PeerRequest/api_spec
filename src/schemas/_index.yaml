@@ -1,2 +1,10 @@
 Error:
   $ref: "./error.yaml"
+Entry:
+  $ref: "./entry.yaml"
+Category:
+  $ref: "./category.yaml"
+User:
+  $ref: "./user.yaml"
+Review:
+  $ref: "./review.yaml"

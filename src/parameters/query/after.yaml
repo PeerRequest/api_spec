@@ -1,0 +1,6 @@
+name: after
+in: query
+description: entity id of last entity from last page
+required: false
+schema:
+  type: integer
