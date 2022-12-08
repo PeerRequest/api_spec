@@ -1,0 +1,18 @@
+type: object
+  required:
+    - id
+    - reviewedEntry
+    - reviewer
+  properties:
+    id:
+      type: string
+    reviewedEntry:
+      $ref: '#/components/schemas/query/Entry'
+    reviewer:
+      $ref: '#/components/schemas/query/User'
+    reviewPDF:
+      type: object #stimmt das so? Es soll ja eigentlich die PDF-datei hin
+    reviewForm:
+      $ref: '#/components/schemas/query/ReviewForm'
+    messageBoard:
+      $ref: '#/components/schemas/query/MessageBoard'
