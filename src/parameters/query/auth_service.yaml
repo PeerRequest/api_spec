@@ -1,0 +1,8 @@
+name: auth_service
+in: query
+description: refers to a specific auth_service
+required: false
+schema:
+  default: "keycloak"
+  type: string
+  enum: [ keycloak, kit ]

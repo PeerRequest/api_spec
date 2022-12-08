@@ -1,0 +1,6 @@
+name: scope
+in: query
+description: contains granted scopes
+required: true
+schema:
+  type: string

@@ -1,0 +1,8 @@
+get:
+  tags:
+    - auth
+  description: "Logout the current user"
+  summary: "/auth/logout"
+  responses:
+    200:
+      description: User successfully logged out

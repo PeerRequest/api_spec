@@ -1,0 +1,6 @@
+name: error
+in: query
+description: contains an error indicating why authorization failed
+required: false
+schema:
+  type: string

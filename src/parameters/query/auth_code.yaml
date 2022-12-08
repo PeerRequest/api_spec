@@ -1,0 +1,6 @@
+name: code
+in: query
+description: auth code give by an auth server to exchange for a token
+required: true
+schema:
+  type: string
