@@ -1,0 +1,14 @@
+type: object
+  properties:
+    summaryOfPaper:
+      type: string
+    mainWeaknesses:
+      type: string
+    mainStrenghts:
+      type: string
+    otherComments:
+      type: string
+    openQuestions:
+      type: string
+    answers:
+      type: string
