@@ -3,7 +3,71 @@ info:
   version: 1.0.0
   title: PeerRequest API
   description: PeerRequest Open API Specification.
-paths: null
+paths:
+  /auth/logout:
+    get:
+      tags:
+        - auth
+      description: Logout the current user
+      summary: /auth/logout
+      responses:
+        '200':
+          description: User successfully logged out
+  /auth/login:
+    get:
+      tags:
+        - auth
+      description: Redirects the user to an auth server
+      summary: /auth/login
+      parameters:
+        - $ref: '#/components/parameters/auth_service'
+      responses:
+        '302':
+          description: Redirect to the specified or default auth service
+        '400':
+          description: Invalid auth_service
+  /auth/callback:
+    get:
+      tags:
+        - auth
+      description: OAuth2 Authentication Callback
+      summary: /auth/callback
+      parameters:
+        - name: code
+          in: query
+          description: auth code give by an auth server to exchange for a token
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: auth state returned by an auth server
+          required: true
+          schema:
+            type: string
+        - name: scope
+          in: query
+          description: contains granted scopes
+          required: true
+          schema:
+            type: string
+        - name: error
+          in: query
+          description: contains an error indicating why authorization failed
+          required: false
+          schema:
+            type: string
+        - name: error_description
+          in: query
+          description: contains an error description
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully logged in (will set a session cookie)
+        '400':
+          description: Malformed request or invalid flow
 components:
   parameters:
     category_id:
@@ -31,6 +95,17 @@ components:
         default: 100
         type: integer
         format: int32
+    auth_service:
+      name: auth_service
+      in: query
+      description: refers to a specific auth_service
+      required: false
+      schema:
+        default: keycloak
+        type: string
+        enum:
+          - keycloak
+          - kit
     after:
       name: after
       in: query
