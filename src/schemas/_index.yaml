@@ -1,3 +1,12 @@
+#query
+limit:
+  $ref: './query/limit.yaml'
+MessageBorad:
+  $ref: './query/messageBoard.yaml'
+Review:
+  $ref: './query/review.yaml'
+ReviewForm:
+  $ref: './query/reviewForm.yaml'
 Error:
   $ref: "./error.yaml"
 Entry:
