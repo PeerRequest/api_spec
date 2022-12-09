@@ -37,6 +37,9 @@ post:
     description: "New PDF review"
     required: true
     content:
+      application/pdf:
+        schema:
+          type: object
       schema:
         type: object
 
