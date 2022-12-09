@@ -27,7 +27,7 @@ paths:
     $ref: "./paths/categories/category_id/entry_id/paper.yaml"
 
   #review endpoints
-  /reviews/reviews:
+  /reviews:
     $ref: "./paths/reviews/reviews.yaml"
 
   /reviews/{review_id}:
