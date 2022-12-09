@@ -1,0 +1,6 @@
+name: entry_id
+in: path
+required: true
+description: The id of the review to retrieve
+schema:
+  type: string

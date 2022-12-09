@@ -26,7 +26,17 @@ paths:
   /categories/{category_id}/entries/{entry_id}/paper:
     $ref: "./paths/categories/category_id/entry_id/paper.yaml"
 
-# TODO: add paths here
+  #review endpoints
+  /reviews/reviews:
+    $ref: "./paths/reviews/reviews.yaml"
+
+  /reviews/{review_id}:
+    $ref: "./paths/reviews/review.yaml"
+
+  /reviews/{review_id}/{messageBoardComment_id}:
+    $ref: "./paths/reviews/review_id/messageBoardComment.yaml"
+
+  # TODO: add paths here
 
 components:
   parameters:
