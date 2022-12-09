@@ -68,6 +68,144 @@ paths:
           description: Successfully logged in (will set a session cookie)
         '400':
           description: Malformed request or invalid flow
+  '/categories/{category_id}/entries':
+    get:
+      tags:
+        - categories
+        - entries
+      description: Returns all entries in a category
+      summary: /categories/<category_id>/entries
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/after'
+      responses:
+        '200':
+          description: List of entries of the specified category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entry'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category does not exist
+    post:
+      tags:
+        - categories
+        - entries
+      description: Adds one or more new entries to a category
+      summary: /categories/<category_id>/entries
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+      requestBody:
+        description: New entry/entries
+        required: true
+        content:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Entry'
+      responses:
+        '200':
+          description: Entry/Entries created
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category does not exist
+  '/categories/{category_id}/entries/{entry_id}':
+    get:
+      tags:
+        - categories
+        - entries
+      description: Returns one entries from a category
+      summary: /categories/<category_id>/entries/<entry_id>
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      responses:
+        '200':
+          description: Entry of the specified category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+    patch:
+      tags:
+        - categories
+        - entries
+      description: Changes details of an entry
+      summary: /categories/<category_id>/entries/<entry_id>
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      requestBody:
+        description: Changed details of the entry
+        required: true
+        content:
+          application/json:
+            $ref: '#/components/schemas/Entry'
+      responses:
+        '200':
+          description: Entry edited
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+    delete:
+      tags:
+        - categories
+        - entries
+      description: Deletes an entry
+      summary: /categories/<category_id>/entries/<entry_id>
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      responses:
+        '200':
+          description: Entry deleted
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+  '/categories/{category_id}/entries/{entry_id}/paper':
+    get:
+      tags:
+        - categories
+        - entries
+      description: Returns paper of an entries from a category
+      summary: /categories/<category_id>/entries/<entry_id>/paper
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      responses:
+        '200':
+          description: Paper of the specified entry
+          content:
+            application/pdf:
+              schema: null
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
 components:
   parameters:
     category_id:
@@ -94,7 +232,6 @@ components:
         max: 100
         default: 100
         type: integer
-        format: int32
     auth_service:
       name: auth_service
       in: query
@@ -143,6 +280,9 @@ components:
         category_id:
           type: integer
           example: 5
+        authors:
+          type: string
+          example: 'Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez'
         slots:
           type: integer
           example: 2
