@@ -23,3 +23,11 @@ properties:
   researcher_name:
     type: string
     example: "Karol Bender"
+  rating_scale:
+    type: object
+    properties:
+      low:
+        type: integer
+      high:
+        type: integer
+    nullable: true
