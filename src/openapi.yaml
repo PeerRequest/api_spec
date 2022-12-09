@@ -23,13 +23,13 @@ paths:
     $ref: "./paths/users/user_id/entries.yaml"
 
   /users/{user_id}/entries/{entry_id}:
-    $ref: "./paths/users/user_id/entry.yaml"
+    $ref: "./paths/users/user_id/entries/entry_id/entry.yaml"
 
   /users/{user_id}/reviews:
     $ref: "./paths/users/user_id/reviews.yaml"
 
   /users/{user_id}/reviews/{review_id}:
-    $ref: "./paths/users/user_id/review.yaml"
+    $ref: "./paths/users/user_id/reviews/review_id/review.yaml"
 
   /users/{user_id}:
     $ref: "./paths/users/user_id/account.yaml"
