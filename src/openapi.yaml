@@ -31,7 +31,7 @@ paths:
   /{user_id}/reviews/{review_id}:
     $ref: "./parameters/paths/user/review.yaml"
 
-  /{user_id}/account:
+  /users/{user_id}:
      $ref: "./parameters/paths/user/account.yaml"
 
 
