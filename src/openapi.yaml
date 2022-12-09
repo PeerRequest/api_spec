@@ -18,7 +18,7 @@ paths:
 
   # /categories endpoints
 
-  /categories/create:
+  /categories:
     $ref: "./paths/categories/categories.yaml"
         
   /categories/{category_id}/entries:
