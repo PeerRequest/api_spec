@@ -1,12 +1,11 @@
 get:
   tags:
-    - user
+    - users
+
   description: "Show the account details of a user"
-  summary: "/<user_id>/account"
+  summary: "/users/<user_id>"
   parameters:
-    - $ref: "../../../parameters/path/user_id.yaml"
-
-
+    - $ref: "../../../src/parameters/path/user_id.yaml"
 
   responses:
     200:
@@ -16,4 +15,4 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../../schemas/user.yaml"
+              $ref: "../../schemas/user.yaml"

@@ -1,6 +1,6 @@
 get:
   tags:
-    - user
+    - users
     - reviews
   description: "Returns one review created by the signed-in user"
   summary: "/<user_id>/reviews/<review_id>"

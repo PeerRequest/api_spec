@@ -1,9 +1,9 @@
 get:
   tags:
-    - user
+    - users
     - entries
-  description: "Returns one entry created by the signed-in user"
-  summary: "/<user_id>/entries/<entry_id>"
+  description: "Returns one entry created by a user"
+  summary: "/users/<user_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../parameters/path/user_id.yaml"
     - $ref: "../../../parameters/path/entry_id.yaml

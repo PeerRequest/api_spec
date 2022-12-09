@@ -1,13 +1,13 @@
 get:
   tags:
-    - user
+    - users
     - reviews
   description: "Returns all reviews of the signed-in user"
   summary: "/<user_id>/reviews"
   parameters:
-    - $ref: "../../../parameters/path/user_id.yaml"
-    - $ref: "../../../parameters/query/limit.yaml"
-    - $ref: "../../../parameters/query/after.yaml"
+    - $ref: "../../parameters/path/user_id.yaml"
+    - $ref: "../../../src/parameters/query/limit.yaml"
+    - $ref: "../../../src/parameters/query/after.yaml"
 
   responses:
     200:
@@ -17,4 +17,4 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../../schemas/review.yaml"
+              $ref: "../../schemas/review.yaml"

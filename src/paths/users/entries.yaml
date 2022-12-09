@@ -1,0 +1,20 @@
+get:
+  tags:
+    - users
+    - entries
+  description: "Returns all entries of a user"
+  summary: "/users/<user_id>/entries"
+  parameters:
+    - $ref: "../../../src/parameters/path/user_id.yaml"
+    - $ref: "../../../src/parameters/query/limit.yaml"
+    - $ref: "../../../src/parameters/query/after.yaml"
+
+  responses:
+    200:
+      description: "List of entries created by the specified user"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../../src/schemas/entry.yaml"
