@@ -37,8 +37,8 @@ properties:
     type: object
     nullable: true
   reviewForm:
-    $ref: './reviewForm.yaml'
+    $ref: './review_form.yaml'
   messageBoard:
     type: array
     items:
-      $ref: './messageBoardComment.yaml'
+      $ref: './comment.yaml'

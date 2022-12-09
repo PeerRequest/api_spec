@@ -5,8 +5,10 @@ get:
   description: "Returns all reviews of an entry"
   summary: "/reviews"
   parameters:
-    - $ref: "../../parameters/query/limit.yaml"
-    - $ref: "../../parameters/query/after.yaml"
+    - $ref: "../parameters/query/limit.yaml"
+    - $ref: "../parameters/query/after.yaml"
+    - $ref: "../parameters/path/entry_id.yaml"
+
 
   responses:
     200:
@@ -16,7 +18,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../schemas/review.yaml"
+              $ref: "../schemas/review.yaml"
 
     400:
       description: "Invalid Request"
@@ -32,15 +34,17 @@ post:
   tags:
     - reviews
   description: "Creates a review for an entry"
-  summary: "/reviews/createReview"
-  #parameters:
+  summary: "/createReview"
+  parameters:
+    - $ref: "../parameters/path/entry_id.yaml"
+
 
   requestBody:
     description: "New review"
     required: true
     content:
       schema:
-        $ref: "../../schemas/review.yaml"
+        $ref: "../schemas/review.yaml"
 
   responses:
     200:

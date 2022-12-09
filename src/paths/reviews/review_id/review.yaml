@@ -5,7 +5,8 @@ get:
   description: "Returns one review from an entry"
   summary: "/reviews/<review_id>"
   parameters:
-    - $ref: "../../parameters/path/review_id.yaml"
+    - $ref: "../../../parameters/path/review_id.yaml"
+    - $ref: "../../../parameters/path/entry_id.yaml"
 
   responses:
     200:
@@ -13,7 +14,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../schemas/review.yaml"
+            $ref: "../../../schemas/review.yaml"
 
     400:
       description: "Invalid Request"
@@ -31,7 +32,7 @@ post:
   description: "Uploads a PDF file to a review"
   summary: "/reviews/<review_id>"
   parameters:
-    - $ref: "../../parameters/path/review_id.yaml"
+    - $ref: "../../../parameters/path/review_id.yaml"
 
   requestBody:
     description: "New PDF review"
@@ -63,14 +64,14 @@ patch:
   description: "Changes contents of the review form"
   summary: "/reviews/<review_id>"
   parameters:
-    - $ref: "../../parameters/path/review_id.yaml"
+    - $ref: "../../../parameters/path/review_id.yaml"
 
   requestBody:
     description: "Changes contents of the review form"
     required: true
     content:
       application/json:
-        $ref: "../../schemas/reviewForm.yaml"
+        $ref: "../../../schemas/review_form.yaml"
 
   responses:
     200:

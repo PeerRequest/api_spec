@@ -4,9 +4,9 @@ post:
     - reviews
     - messageBoard
   description: "Creates a new comment on the message board of a review"
-  summary: "reviews/<review_id>/<messageBoardComment_id>"
+  summary: "reviews/<review_id>/<comment_id>"
   parameters:
-    - $ref: "../../../parameters/path/review_id.yaml"
+    - $ref: "../../../../parameters/path/review_id.yaml"
 
 
   requestBody:
@@ -14,7 +14,7 @@ post:
     required: true
     content:
       schema:
-        $ref: "../../../schemas/messageBoardComment.yaml"
+        $ref: "../../../../schemas/comment.yaml"
 
   responses:
     200:
@@ -35,10 +35,10 @@ delete:
     - reviews
     - messageBoard
   description: "Deletes a comment"
-  summary: "/<review_id>/<messageBoardComment_id>"
+  summary: "/<review_id>/<comment_id>"
   parameters:
-    - $ref: "../../../parameters/path/review_id.yaml"
-    - $ref: "../../../parameters/path/messageBoardComment_id.yaml"
+    - $ref: "../../../../parameters/path/review_id.yaml"
+    - $ref: "../../../../parameters/path/comment_id.yaml"
 
   responses:
     200:
@@ -59,17 +59,17 @@ patch:
     - reviews
     - messageBoard
   description: "Changes the contents of the message board comment"
-  summary: "/<review_id>/<messageBoardComment_id>"
+  summary: "/<review_id>/<comment_id>"
   parameters:
-    - $ref: "../../../parameters/path/review_id.yaml"
-    - $ref: "../../../parameters/path/messageBoardComment_id.yaml"
+    - $ref: "../../../../parameters/path/review_id.yaml"
+    - $ref: "../../../../parameters/path/comment_id.yaml"
 
   requestBody:
     description: "Changed contents of the comment"
     required: true
     content:
       application/json:
-        $ref: "../../../schemas/messageBoardComment.yaml"
+        $ref: "../../../../schemas/comment.yaml"
 
   responses:
     200:
