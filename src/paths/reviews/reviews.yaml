@@ -33,7 +33,7 @@ post:
     - reviews
   description: "Creates a review for an entry"
   summary: "/reviews/createReview"
-  parameters:
+  #parameters:
 
   requestBody:
     description: "New review"
