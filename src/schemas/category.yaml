@@ -13,6 +13,7 @@ properties:
     type: string
     example: "Tue, 29. Nov 2022"
     format: "ddd, dd. mmm yyyy"
+    nullable: true
   title:
     type: string
     example: "International Paper Conference"
