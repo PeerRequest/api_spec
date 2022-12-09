@@ -7,4 +7,4 @@ schema:
   max: 100
   default: 100
   type: integer
-  format: int32
+
