@@ -10,7 +10,7 @@ get:
 
   responses:
     200:
-      description: "Account details of the signed-in user"
+      description: "Account details of a user"
       content:
         application/json:
           schema:
