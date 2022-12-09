@@ -17,6 +17,10 @@ paths:
     $ref: "./paths/auth/callback.yaml"
 
   # /categories endpoints
+
+  /categories/create:
+    $ref: "./paths/categories/categories.yaml"
+        
   /categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 

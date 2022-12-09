@@ -13,6 +13,7 @@ properties:
     type: string
     example: "Tue, 29. Nov 2022"
     format: "ddd, dd. mmm yyyy"
+    # nullable: true noch hinzufügen?
   title:
     type: string
     example: "International Paper Conference"
@@ -22,3 +23,4 @@ properties:
   researcher_name:
     type: string
     example: "Karol Bender"
+  # TODO: fehlt nicht noch score (bspw. String Array für die Skala "low/mid/high")?
