@@ -13,6 +13,7 @@ properties:
     type: string
     example: "Tue, 29. Nov 2022"
     format: "ddd, dd. mmm yyyy"
+    nullable: true
   title:
     type: string
     example: "International Paper Conference"
@@ -22,3 +23,11 @@ properties:
   researcher_name:
     type: string
     example: "Karol Bender"
+  rating_scale:
+    type: object
+    properties:
+      low:
+        type: integer
+      high:
+        type: integer
+    nullable: true
