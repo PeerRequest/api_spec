@@ -34,7 +34,7 @@ paths:
     $ref: "./paths/reviews/review_id/review.yaml"
 
   /reviews/{review_id}/{comment_id}:
-    $ref: "./paths/reviews/review_id/messageBoardComment.yaml"
+    $ref: "./paths/reviews/review_id/comment_id/comment.yaml"
 
   # TODO: add paths here
 
