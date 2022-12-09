@@ -1,7 +1,7 @@
 get:
   tags:
     - user
-  description: "Show the account details of the signed-in user"
+  description: "Show the account details of a user"
   summary: "/<user_id>/account"
   parameters:
     - $ref: "../../../parameters/path/user_id.yaml"
