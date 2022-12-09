@@ -1,0 +1,19 @@
+get:
+  tags:
+    - user
+    - reviews
+  description: "Returns one review created by the signed-in user"
+  summary: "/<user_id>/reviews/<review_id>"
+  parameters:
+    - $ref: "../../../parameters/path/user_id.yaml"
+    - $ref: "../../../parameters/path/review_id.yaml
+
+  responses:
+    200:
+      description: "Review created by the specified user is shown"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../../schemas/review.yaml"

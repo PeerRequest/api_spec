@@ -1,0 +1,19 @@
+get:
+  tags:
+    - user
+  description: "Show the account details of the signed-in user"
+  summary: "/<user_id>/account"
+  parameters:
+    - $ref: "../../../parameters/path/user_id.yaml"
+
+
+
+  responses:
+    200:
+      description: "Account details of the signed-in user"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../../schemas/user.yaml"

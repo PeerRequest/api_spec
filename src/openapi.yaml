@@ -18,6 +18,23 @@ paths:
 
   # TODO: add paths here
 
+  # user endpoints
+  /{user_id}/entries:
+    $ref: "./parameters/paths/user/entries.yaml"
+
+  /{user_id}/entries/{entry_id}:
+    $ref: "./parameters/paths/user/entry.yaml"
+
+  /{user_id}/reviews:
+    $ref: "./parameters/paths/user/reviews.yaml"
+
+  /{user_id}/reviews/{review_id}:
+    $ref: "./parameters/paths/user/review.yaml"
+
+  /{user_id}/account:
+     $ref: "./parameters/paths/user/account.yaml"
+
+
 components:
   parameters:
     $ref: "./parameters/_index.yaml"
