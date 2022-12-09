@@ -28,7 +28,7 @@ paths:
 
   #review endpoints
   /reviews:
-    $ref: "./paths/reviews/reviews.yaml"
+    $ref: "./paths/reviews.yaml"
 
   /reviews/{review_id}:
     $ref: "./paths/reviews/review.yaml"
