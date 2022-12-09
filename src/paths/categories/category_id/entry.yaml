@@ -1,3 +1,4 @@
+#get entry
 get:
   tags:
     - categories
@@ -15,6 +16,61 @@ get:
         application/json:
           schema:
             $ref: "../../../schemas/entry.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"
+
+#update entry
+patch:
+  tags:
+    - categories
+    - entries
+  description: "Changes details of an entry"
+  summary: "/categories/<category_id>/entries/<entry_id>"
+  parameters:
+     - $ref: "../../../parameters/path/category_id.yaml"
+     - $ref: "../../../parameters/path/entry_id.yaml"
+
+  requestBody:
+    description: "Changed details of the entry"
+    required: true
+    content:
+      application/json:
+        $ref: "../../../schemas/entry.yaml"
+
+  responses:
+    200:
+      description: "Entry edited"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"
+
+#delete entry
+delete:
+  tags:
+    - categories
+    - entries
+  description: "Deletes an entry"
+  summary: "/categories/<category_id>/entries/<entry_id>"
+  parameters:
+     - $ref: "../../../parameters/path/category_id.yaml"
+     - $ref: "../../../parameters/path/entry_id.yaml"
+
+  responses:
+    200:
+      description: "Entry deleted"
 
     400:
       description: "Invalid Request"
