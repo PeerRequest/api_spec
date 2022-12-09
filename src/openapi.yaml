@@ -20,19 +20,19 @@ paths:
 
   # /users endpoints
   /users/{user_id}/entries:
-    $ref: "./paths/users/entries.yaml"
+    $ref: "./paths/users/user_id/entries.yaml"
 
   /users/{user_id}/entries/{entry_id}:
-    $ref: "./paths/users/entry.yaml"
+    $ref: "./paths/users/user_id/entry.yaml"
 
   /users/{user_id}/reviews:
-    $ref: "./paths/users/reviews.yaml"
+    $ref: "./paths/users/user_id/reviews.yaml"
 
   /users/{user_id}/reviews/{review_id}:
-    $ref: "./paths/users/review.yaml"
+    $ref: "./paths/users/user_id/review.yaml"
 
   /users/{user_id}:
-    $ref: "./paths/users/account.yaml"
+    $ref: "./paths/users/user_id/account.yaml"
 
 
 
