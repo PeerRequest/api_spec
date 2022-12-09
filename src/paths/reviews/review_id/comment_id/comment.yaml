@@ -2,16 +2,14 @@
 post:
   tags:
     - reviews
-    - messageBoard
   description: "Creates a new comment on the message board of a review"
-  summary: "reviews/<review_id>/<comment_id>"
+  summary: "/reviews/<review_id>/<comment_id>"
   parameters:
     - $ref: "../../../../parameters/path/review_id.yaml"
 
 
   requestBody:
     description: "New message board comment"
-    required: true
     content:
       schema:
         $ref: "../../../../schemas/comment.yaml"
@@ -33,9 +31,8 @@ post:
 delete:
   tags:
     - reviews
-    - messageBoard
   description: "Deletes a comment"
-  summary: "/<review_id>/<comment_id>"
+  summary: "/reviews/<review_id>/<comment_id>"
   parameters:
     - $ref: "../../../../parameters/path/review_id.yaml"
     - $ref: "../../../../parameters/path/comment_id.yaml"
@@ -57,16 +54,14 @@ delete:
 patch:
   tags:
     - reviews
-    - messageBoard
   description: "Changes the contents of the message board comment"
-  summary: "/<review_id>/<comment_id>"
+  summary: "/reviews/<review_id>/<comment_id>"
   parameters:
     - $ref: "../../../../parameters/path/review_id.yaml"
     - $ref: "../../../../parameters/path/comment_id.yaml"
 
   requestBody:
     description: "Changed contents of the comment"
-    required: true
     content:
       application/json:
         $ref: "../../../../schemas/comment.yaml"

@@ -5,4 +5,4 @@ properties:
     example: 42
   comment:
     type: string
-    example: I really like your focus on structre
+    example: "I really like your focus on structure"

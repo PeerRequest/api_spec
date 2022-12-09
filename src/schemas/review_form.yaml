@@ -1,20 +1,27 @@
 type: object
 properties:
-  summaryOfPaper:
+  score:
+    type: integer
+    minimum: 1
+    maximum: 5
+  confidence:
     type: string
-    example: mitochondria the powerhouse of the cell
-  mainWeaknesses:
+    enum: [ "Low", "Medium", "High" ]
+  summary_of_paper:
     type: string
-    example: unclear structure
-  mainStrenghts:
+    example: "mitochondria the powerhouse of the cell"
+  main_weaknesses:
     type: string
-    example: good language
-  otherComments:
+    example: "unclear structure"
+  main_strenghts:
     type: string
-    example: I like the design
-  openQuestions:
+    example: "good language"
+  other_comments:
     type: string
-    example: What is the meaning of life?
+    example: "I like the design"
+  open_questions:
+    type: string
+    example: "What is the meaning of life?"
   answers:
     type: string
-    example: The answer would be 42
+    example: "The answer would be 42"

@@ -36,7 +36,6 @@ post:
 
   requestBody:
     description: "New PDF review"
-    required: true
     content:
       application/pdf:
         schema:

@@ -34,14 +34,13 @@ post:
   tags:
     - reviews
   description: "Creates a review for an entry"
-  summary: "/createReview"
+  summary: "/reviews"
   parameters:
     - $ref: "../parameters/path/entry_id.yaml"
 
 
   requestBody:
     description: "New review"
-    required: true
     content:
       schema:
         $ref: "../schemas/review.yaml"
