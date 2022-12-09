@@ -32,15 +32,13 @@ properties:
     type: string
     example: "Tue, 29. Nov 2022"
     format: "ddd, dd. mmm yyyy"
-
   pdfReview:
     description: "The PDF-file of the research paper but filled with comments"
     type: object
-
+    nullable: true
   reviewForm:
     $ref: './reviewForm.yaml'
-
   messageBoard:
     type: array
-      items:
-        $ref: './messageBoardComment.yaml'
+    items:
+      $ref: './messageBoardComment.yaml'

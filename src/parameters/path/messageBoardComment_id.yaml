@@ -1,6 +1,6 @@
-name: entry_id
+name: messageBoardComment_id
 in: path
 required: true
-description: The id of the review to retrieve
+description: The id of the comment to retrieve
 schema:
   type: string
