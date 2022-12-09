@@ -31,7 +31,7 @@ paths:
     $ref: "./paths/reviews.yaml"
 
   /reviews/{review_id}:
-    $ref: "./paths/reviews/review.yaml"
+    $ref: "./paths/reviews/review_id/review.yaml"
 
   /reviews/{review_id}/{messageBoardComment_id}:
     $ref: "./paths/reviews/review_id/messageBoardComment.yaml"
