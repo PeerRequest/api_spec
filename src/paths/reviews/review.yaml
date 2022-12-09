@@ -1,0 +1,84 @@
+# get review
+get:
+  tags:
+    - reviews
+  description: "Returns one review from an entry"
+  summary: "/reviews/<review_id>"
+  parameters:
+    - $ref: "../../parameters/path/review_id.yaml"
+
+  responses:
+    200:
+      description: "Review of the specified entry"
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/review.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested entry does not exist"
+
+# upload PDF review
+post:
+  tags:
+    - reviews
+  description: "Uploads a PDF file to a review"
+  summary: "/reviews/<review_id>"
+  parameters:
+    - $ref: "../../parameters/path/review_id.yaml"
+
+  requestBody:
+    description: "New PDF review"
+    required: true
+    content:
+      schema:
+        type: object
+
+  responses:
+    200:
+      description: "PDF uploaded"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested review does not exist"
+
+#edit review form
+patch:
+  tags:
+    - reviews
+  description: "Changes contents of the review form"
+  summary: "/reviews/<review_id>"
+  parameters:
+    - $ref: "../../parameters/path/review_id.yaml"
+
+  requestBody:
+    description: "Changes contents of the review form"
+    required: true
+    content:
+      application/json:
+        $ref: "../../schemas/reviewForm.yaml"
+
+  responses:
+    200:
+      description: "Review form edited"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested review does not exist"
+

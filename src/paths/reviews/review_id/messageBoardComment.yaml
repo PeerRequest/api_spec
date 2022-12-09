@@ -1,0 +1,85 @@
+#add message board comment
+post:
+  tags:
+    - reviews
+    - messageBoard
+  description: "Creates a new comment on the message board of a review"
+  summary: "reviews/<review_id>/<messageBoardComment_id>"
+  parameters:
+    - $ref: "../../../parameters/path/review_id.yaml"
+
+
+  requestBody:
+    description: "New message board comment"
+    required: true
+    content:
+      schema:
+        $ref: "../../../schemas/messageBoardComment.yaml"
+
+  responses:
+    200:
+      description: "Comment added"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested review does not exist"
+
+#delete message board comment
+delete:
+  tags:
+    - reviews
+    - messageBoard
+  description: "Deletes a comment"
+  summary: "/<review_id>/<messageBoardComment_id>"
+  parameters:
+    - $ref: "../../../parameters/path/review_id.yaml"
+    - $ref: "../../../parameters/path/messageBoardComment_id.yaml"
+
+  responses:
+    200:
+      description: "Comment deleted"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested review or comment does not exist"
+
+#edit message board comment
+patch:
+  tags:
+    - reviews
+    - messageBoard
+  description: "Changes the contents of the message board comment"
+  summary: "/<review_id>/<messageBoardComment_id>"
+  parameters:
+    - $ref: "../../../parameters/path/review_id.yaml"
+    - $ref: "../../../parameters/path/messageBoardComment_id.yaml"
+
+  requestBody:
+    description: "Changed contents of the comment"
+    required: true
+    content:
+      application/json:
+        $ref: "../../../schemas/messageBoardComment.yaml"
+
+  responses:
+    200:
+      description: "Comment edited"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested review or comment does not exist"

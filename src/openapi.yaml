@@ -16,6 +16,18 @@ paths:
   /auth/callback:
     $ref: "./paths/auth/callback.yaml"
 
+  #review endpoints
+  /reviews/reviews:
+    $ref: "./paths/reviews/reviews.yaml"
+
+  /reviews/{review_id}:
+    $ref: "./paths/reviews/review.yaml"
+
+  /reviews/{review_id}/{messageBoardComment_id}:
+    $ref: "./paths/reviews/review_id/messageBoardComment.yaml"
+
+
+
   # TODO: add paths here
 
 components:
