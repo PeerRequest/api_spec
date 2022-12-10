@@ -1,7 +1,7 @@
 get:
   tags:
     - entries
-  description: "Returns the paper of an enty from a category"
+  description: "Returns the paper of an entry from a category"
   operationId: getPaper
   summary: "/categories/<category_id>/entries/<entry_id>/paper"
   parameters:
