@@ -8,3 +8,5 @@ User:
   $ref: "./user.yaml"
 Review:
   $ref: "./review.yaml"
+Review Form:
+  $ref: "./review_form.yaml"

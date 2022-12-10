@@ -15,6 +15,9 @@ properties:
   category_id:
     type: integer
     example: 5
+  authors: 
+    type: string
+    example: "Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez"
   slots:
     type: integer
     example: 2
