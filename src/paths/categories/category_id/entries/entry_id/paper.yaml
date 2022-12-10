@@ -1,7 +1,8 @@
 get:
   tags:
     - entries
-  description: "Returns paper of an entries from a category"
+  description: "Returns the paper of an entry from a category"
+  operationId: getPaper
   summary: "/categories/<category_id>/entries/<entry_id>/paper"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
