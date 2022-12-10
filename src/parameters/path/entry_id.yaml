@@ -1,6 +1,6 @@
 name: entry_id
 in: path
 required: true
-description: The id of the entry to retrieve
+description: The id of an entry
 schema:
   type: string

@@ -1,6 +1,6 @@
 name: comment_id
 in: path
 required: true
-description: The id of the comment to retrieve
+description: The id of a comment
 schema:
   type: string

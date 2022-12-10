@@ -2,6 +2,7 @@ get:
   tags:
     - categories
   description: "Returns all categories"
+  operationId: getCategories
   summary: "/categories"
   parameters:
     - $ref: "../parameters/query/limit.yaml"
@@ -27,6 +28,7 @@ post:
   tags:
     - categories
   description: "Creates a new category"
+  operationId: createCategory
   summary: "/categories"
   requestBody:
     description: "New category"

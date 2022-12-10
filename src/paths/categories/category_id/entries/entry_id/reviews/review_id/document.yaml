@@ -2,6 +2,7 @@ get:
   tags:
     - reviews
   description: "Returns the documents attached to the review"
+  operationId: getReviewDocument
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>/documents"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
@@ -29,6 +30,7 @@ put:
   tags:
     - reviews
   description: "Attaches a document to a review"
+  operationId: addReviewDocument
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>/document"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
@@ -59,6 +61,7 @@ delete:
   tags:
     - reviews
   description: "Deletes a document attached to an review"
+  operationId: deleteReviewDocument
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>/document"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
