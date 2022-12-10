@@ -48,6 +48,7 @@ paths:
 
   /users/self:
     $ref: "./paths/users/self.yaml"
+
   /users/self/entries:
     $ref: "./paths/users/self/entries.yaml"
 
