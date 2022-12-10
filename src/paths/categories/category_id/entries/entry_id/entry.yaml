@@ -1,13 +1,12 @@
 #get entry
 get:
   tags:
-    - categories
     - entries
   description: "Returns one entries from a category"
   summary: "/categories/<category_id>/entries/<entry_id>"
   parameters:
-    - $ref: "../../../../parameters/path/category_id.yaml"
-    - $ref: "../../../../parameters/path/entry_id.yaml"
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   responses:
     200:
@@ -15,7 +14,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../../../schemas/entry.yaml"
+            $ref: "../../../../../schemas/entry.yaml"
 
     400:
       description: "Invalid Request"
@@ -29,20 +28,19 @@ get:
 #update entry
 patch:
   tags:
-    - categories
     - entries
   description: "Changes details of an entry"
   summary: "/categories/<category_id>/entries/<entry_id>"
   parameters:
-    - $ref: "../../../../parameters/path/category_id.yaml"
-    - $ref: "../../../../parameters/path/entry_id.yaml"
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   requestBody:
     description: "Changed details of the entry"
     required: true
     content:
       application/json:
-        $ref: "../../../../schemas/entry.yaml"
+        $ref: "../../../../../schemas/entry.yaml"
 
   responses:
     200:
@@ -60,13 +58,12 @@ patch:
 #delete entry
 delete:
   tags:
-    - categories
     - entries
   description: "Deletes an entry"
   summary: "/categories/<category_id>/entries/<entry_id>"
   parameters:
-    - $ref: "../../../../parameters/path/category_id.yaml"
-    - $ref: "../../../../parameters/path/entry_id.yaml"
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   responses:
     200:

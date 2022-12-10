@@ -16,15 +16,19 @@ paths:
   /auth/callback:
     $ref: "./paths/auth/callback.yaml"
 
-  # /categories endpoints
+  # entry endpoints
   /categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 
   /categories/{category_id}/entries/{entry_id}:
-    $ref: "./paths/categories/category_id/entry_id/entry.yaml"
+    $ref: "./paths/categories/category_id/entries/entry_id/entry.yaml"
 
   /categories/{category_id}/entries/{entry_id}/paper:
-    $ref: "./paths/categories/category_id/entry_id/paper.yaml"
+    $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
+
+  # review endpoints
+  /categories/{category_id}/entries/{entry_id}/reviews:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews.yaml"
 
   #review endpoints
   /reviews:

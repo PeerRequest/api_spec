@@ -1,7 +1,6 @@
 #get entries of a category
 get:
   tags:
-    - categories
     - entries
   description: "Returns all entries in a category"
   summary: "/categories/<category_id>/entries"
@@ -32,7 +31,6 @@ get:
 #create entry
 post:
   tags:
-    - categories
     - entries
   description: "Adds one or more new entries to a category"
   summary: "/categories/<category_id>/entries"
