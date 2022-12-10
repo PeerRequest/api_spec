@@ -206,6 +206,28 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category or entry does not exist
+  /reviews:
+    get:
+      tags:
+        - reviews
+      description: Returns all reviews that are associated to the requesting user.
+      summary: /reviews
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/after'
+      responses:
+        '200':
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
 components:
   parameters:
     category_id:
@@ -370,6 +392,41 @@ components:
           type: string
           example: 'Tue, 29. Nov 2022'
           format: 'ddd, dd. mmm yyyy'
+        pdf_review:
+          description: The PDF-file of the research paper but filled with comments
+          type: object
+          nullable: true
+        review_form:
+          $ref: '#/components/schemas/Review%20Form'
+    Review Form:
+      type: object
+      properties:
+        score:
+          type: integer
+        confidence:
+          type: string
+          enum:
+            - Low
+            - Medium
+            - High
+        summary_of_paper:
+          type: string
+          example: mitochondria the powerhouse of the cell
+        main_weaknesses:
+          type: string
+          example: unclear structure
+        main_strengths:
+          type: string
+          example: good language
+        other_comments:
+          type: string
+          example: I like the design
+        open_questions:
+          type: string
+          example: What is the meaning of life?
+        answers:
+          type: string
+          example: The answer would be 42
   responses:
     UnexpectedError:
       description: unexpected error
