@@ -1,6 +1,0 @@
-name: user_id
-in: path
-required: true
-description: The id of the signed-in user
-schema:
-  type: string
