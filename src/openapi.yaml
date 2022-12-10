@@ -32,7 +32,7 @@ paths:
     $ref: "./paths/users/user_id/reviews/review_id/review.yaml"
 
   /users/{user_id}:
-    $ref: "./paths/users/user_id/account.yaml"
+    $ref: "./paths/users/user_id/user.yaml"
 
 
 
