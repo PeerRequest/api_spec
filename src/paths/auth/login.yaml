@@ -2,7 +2,7 @@ get:
   tags:
     - auth
   description: "Redirects the user to an auth server"
-  operationId: authLogin
+  operationId: loginRedirect
   summary: "/auth/login"
   parameters:
     - $ref: "../../parameters/query/auth_service.yaml"
