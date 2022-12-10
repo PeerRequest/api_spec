@@ -27,12 +27,18 @@ paths:
     $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
 
   # review endpoints
+  /reviews:
+    $ref: "./paths/reviews.yaml"
+
   /categories/{category_id}/entries/{entry_id}/reviews:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews.yaml"
 
-  #review endpoints
-  /reviews:
-    $ref: "./paths/reviews.yaml"
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/review.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
+
 
   # TODO: add paths here
 

@@ -26,7 +26,7 @@ get:
       description: "Unauthorized"
 
     404:
-      description: "The requested category or entry does not exist"
+      description: "The specified entry or category does not exist"
 
 post:
   tags:
@@ -41,7 +41,7 @@ post:
     description: "New review"
     content:
       schema:
-        $ref: "../schemas/review.yaml"
+        $ref: "../../../../../schemas/review.yaml"
 
   responses:
     200:
@@ -54,4 +54,4 @@ post:
       description: "Unauthorized"
 
     404:
-      description: "The requested category or entry does not exist"
+      description: "The specified entry or category does not exist"
