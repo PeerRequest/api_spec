@@ -2,7 +2,8 @@
 get:
   tags:
     - entries
-  description: "Returns one entries from a category"
+  description: "Returns one entry from a category"
+  operationId: getEntry
   summary: "/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
