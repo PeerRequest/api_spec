@@ -21,7 +21,7 @@ paths:
     $ref: "./paths/categories/category_id/entries.yaml"
 
   /categories/{category_id}/entries/{entry_id}:
-    $ref: "./paths/categories/category_id/entry.yaml"
+    $ref: "./paths/categories/category_id/entry_id/entry.yaml"
 
   /categories/{category_id}/entries/{entry_id}/paper:
     $ref: "./paths/categories/category_id/entry_id/paper.yaml"
