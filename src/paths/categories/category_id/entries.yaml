@@ -34,7 +34,7 @@ post:
   tags:
     - entries
   description: "Adds one or more new entries to a category"
-  operationId: addEntry
+  operationId: ceateEntry
   summary: "/categories/<category_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
