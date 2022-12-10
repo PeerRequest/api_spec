@@ -40,8 +40,9 @@ post:
   requestBody:
     description: "New review"
     content:
-      schema:
-        $ref: "../../../../../schemas/review.yaml"
+      application/json:
+        schema:
+          $ref: "../../../../../schemas/review.yaml"
 
   responses:
     200:

@@ -40,7 +40,8 @@ patch:
     required: true
     content:
       application/json:
-        $ref: "../../../../../schemas/entry.yaml"
+        schema:
+          $ref: "../../../../../schemas/entry.yaml"
 
   responses:
     200:

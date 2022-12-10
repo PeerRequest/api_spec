@@ -40,7 +40,8 @@ patch:
     required: true
     content:
       application/json:
-        $ref: "../../../../../../../schemas/review_form.yaml"
+        schema:
+          $ref: "../../../../../../../schemas/review_form.yaml"
 
   responses:
     200:

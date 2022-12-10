@@ -40,11 +40,12 @@ post:
   requestBody:
     description: "New entry/entries"
     required: true
-    content: 
-      schema:
-        type: array
-        items: 
-          $ref: "../../../schemas/entry.yaml"
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: "../../../schemas/entry.yaml"
 
   responses:
     200:
