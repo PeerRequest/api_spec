@@ -28,7 +28,7 @@ post:
   tags:
     - categories
   description: "Creates a new category"
-  operationId: addCategory
+  operationId: createCategory
   summary: "/categories"
   requestBody:
     description: "New category"
