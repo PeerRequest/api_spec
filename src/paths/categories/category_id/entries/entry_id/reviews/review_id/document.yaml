@@ -41,8 +41,6 @@ put:
       application/pdf:
         schema:
           type: object
-      schema:
-        type: object
 
   responses:
     200:

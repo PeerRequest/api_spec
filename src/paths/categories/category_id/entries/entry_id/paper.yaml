@@ -13,6 +13,7 @@ get:
       content:
         application/pdf:
           schema:
+            type: object
 
     400:
       description: "Invalid Request"

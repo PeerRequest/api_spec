@@ -1,10 +1,8 @@
 get:
   tags:
     - users
-
   description: "Show the account details of the requesting user"
   summary: "/users/self"
-  parameters:
 
   responses:
     200:
@@ -12,6 +10,5 @@ get:
       content:
         application/json:
           schema:
-            type:
             items:
               $ref: "../../schemas/user.yaml"

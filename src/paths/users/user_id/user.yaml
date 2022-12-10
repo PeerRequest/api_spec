@@ -13,6 +13,4 @@ get:
       content:
         application/json:
           schema:
-            type:
-            items:
-              $ref: "../../../schemas/user.yaml"
+            $ref: "../../../schemas/user.yaml"
