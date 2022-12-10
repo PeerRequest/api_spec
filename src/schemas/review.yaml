@@ -38,7 +38,3 @@ properties:
     nullable: true
   review_form:
     $ref: './review_form.yaml'
-  message_board:
-    type: array
-    items:
-      $ref: './comment.yaml'

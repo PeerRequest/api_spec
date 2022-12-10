@@ -13,7 +13,7 @@ properties:
   main_weaknesses:
     type: string
     example: "unclear structure"
-  main_strenghts:
+  main_strengths:
     type: string
     example: "good language"
   other_comments:

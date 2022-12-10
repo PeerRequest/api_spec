@@ -30,12 +30,6 @@ paths:
   /reviews:
     $ref: "./paths/reviews.yaml"
 
-  /reviews/{review_id}:
-    $ref: "./paths/reviews/review_id/review.yaml"
-
-  /reviews/{review_id}/{comment_id}:
-    $ref: "./paths/reviews/review_id/comment_id/comment.yaml"
-
   # TODO: add paths here
 
 components:

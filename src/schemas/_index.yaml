@@ -10,5 +10,3 @@ Review:
   $ref: "./review.yaml"
 Review Form:
   $ref: "./review_form.yaml"
-Comment:
-  $ref: "./comment.yaml"
