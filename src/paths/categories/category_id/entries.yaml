@@ -1,7 +1,6 @@
 #get entries of a category
 get:
   tags:
-    - categories
     - entries
   description: "Returns all entries in a category"
   summary: "/categories/<category_id>/entries"
@@ -32,7 +31,6 @@ get:
 #create entry
 post:
   tags:
-    - categories
     - entries
   description: "Adds one or more new entries to a category"
   summary: "/categories/<category_id>/entries"
@@ -42,11 +40,12 @@ post:
   requestBody:
     description: "New entry/entries"
     required: true
-    content: 
-      schema:
-        type: array
-        items: 
-          $ref: "../../../schemas/entry.yaml"
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: "../../../schemas/entry.yaml"
 
   responses:
     200:

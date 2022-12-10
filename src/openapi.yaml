@@ -16,19 +16,29 @@ paths:
   /auth/callback:
     $ref: "./paths/auth/callback.yaml"
 
-  # /categories endpoints
+  # entry endpoints
   /categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 
   /categories/{category_id}/entries/{entry_id}:
-    $ref: "./paths/categories/category_id/entry.yaml"
+    $ref: "./paths/categories/category_id/entries/entry_id/entry.yaml"
 
   /categories/{category_id}/entries/{entry_id}/paper:
-    $ref: "./paths/categories/category_id/entry_id/paper.yaml"
+    $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
 
-  #review endpoints
+  # review endpoints
   /reviews:
     $ref: "./paths/reviews.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/review.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
+
 
   # TODO: add paths here
 
