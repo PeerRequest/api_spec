@@ -2,7 +2,7 @@ get:
   tags:
     - reviews
   description: "Returns a review from an entry"
-  operationId: getEntryReview
+  operationId: getReview
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
