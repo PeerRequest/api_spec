@@ -2,6 +2,7 @@ get:
   tags:
     - auth
   description: "Logout the current user"
+  operationId: authLogout
   summary: "/auth/logout"
   responses:
     200:

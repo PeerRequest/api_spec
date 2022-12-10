@@ -31,6 +31,7 @@ patch:
   tags:
     - entries
   description: "Changes details of an entry"
+  operationId: patchEntry
   summary: "/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
@@ -62,6 +63,7 @@ delete:
   tags:
     - entries
   description: "Deletes an entry"
+  operationId: deleteEntry
   summary: "/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"

@@ -2,6 +2,7 @@ get:
   tags:
     - reviews
   description: "Returns a review from an entry"
+  operationId: getEntryReview
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
@@ -29,6 +30,7 @@ patch:
   tags:
     - reviews
   description: "Updates a review form"
+  operationId: patchReview
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
@@ -60,6 +62,7 @@ delete:
   tags:
     - reviews
   description: "Deletes a review form"
+  operationId: deleteReview
   summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"

@@ -2,6 +2,7 @@ get:
   tags:
     - auth
   description: "OAuth2 Authentication Callback"
+  operationId: authCallback
   summary: "/auth/callback"
   parameters:
     - $ref: "../../parameters/query/auth_code.yaml"
