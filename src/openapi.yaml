@@ -18,7 +18,7 @@ paths:
 
   # category endpoints
   /categories:
-    $ref: "./paths/categories/categories.yaml"
+    $ref: "./paths/categories.yaml"
 
   /categories/{category_id}:
     $ref: "./paths/categories/category_id/category.yaml"

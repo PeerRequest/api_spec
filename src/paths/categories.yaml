@@ -2,10 +2,10 @@ get:
   tags:
     - categories
   description: "Returns all categories"
-  summary: "/categories/categories"
+  summary: "/categories"
   parameters:
-    - $ref: "../../parameters/query/limit.yaml"
-    - $ref: "../../parameters/query/after.yaml"
+    - $ref: "../parameters/query/limit.yaml"
+    - $ref: "../parameters/query/after.yaml"
 
   responses:
     200:
@@ -15,7 +15,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "../../schemas/category.yaml"
+              $ref: "../schemas/category.yaml"
 
     400:
       description: "Invalid Request"
@@ -27,20 +27,18 @@ post:
   tags:
     - categories
   description: "Creates a new category"
-  summary: "/categories/categories"
-  parameters:
-    - $ref: "../../parameters/path/category_id.yaml"
+  summary: "/categories"
   requestBody:
     description: "New category"
     required: true
     content:
-      schema:
-        type: 
-          $ref: "../../schemas/category.yaml"
+      application/json:
+        schema:
+          $ref: "../schemas/category.yaml"
   responses:
     200:
-      description: "Category created"      
+      description: "Category created"
     400:
-      description: "Invalid Request"      
+      description: "Invalid Request"
     401:
       description: "Unauthorized"
