@@ -1,12 +1,11 @@
 get:
   tags:
-    - categories
     - entries
   description: "Returns paper of an entries from a category"
   summary: "/categories/<category_id>/entries/<entry_id>/paper"
   parameters:
-    - $ref: "../../../../parameters/path/category_id.yaml"
-    - $ref: "../../../../parameters/path/entry_id.yaml"
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   responses:
     200:

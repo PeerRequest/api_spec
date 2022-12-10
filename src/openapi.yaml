@@ -6,7 +6,7 @@ info:
   #servers:
   # TODO: add servers here
 paths:
-  # /auth endpoints
+  # auth endpoints
   /auth/logout:
     $ref: "./paths/auth/logout.yaml"
 
@@ -16,30 +16,45 @@ paths:
   /auth/callback:
     $ref: "./paths/auth/callback.yaml"
 
-  # /categories endpoints
-
+  # category endpoints
   /categories:
     $ref: "./paths/categories/categories.yaml"
-        
+
+  # entry endpoints
   /categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 
   /categories/{category_id}/entries/{entry_id}:
-    $ref: "./paths/categories/category_id/entry.yaml"
-
-  /categories/{category_id}/entries/create:
-    $ref: "./paths/categories/category_id/createEntry.yaml"
+    $ref: "./paths/categories/category_id/entries/entry_id/entry.yaml"
 
   /categories/{category_id}/entries/{entry_id}/paper:
-    $ref: "./paths/categories/category_id/entry_id/paper.yaml"
-  
-  /categories/{category_id}/entries/{entry_id}/edit:
-    $ref: "./paths/categories/category_id/entry_id/edit.yaml"
+    $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
 
-  /categories/{category_id}/entries/{entry_id}/delete:
-    $ref: "./paths/categories/category_id/entry_id/delete.yaml"
+  # review endpoints
+  /reviews:
+    $ref: "./paths/reviews.yaml"
 
-# TODO: add paths here
+  /categories/{category_id}/entries/{entry_id}/reviews:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/review.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
+
+  # user endpoints
+  /users/{user_id}/entries:
+    $ref: "./paths/users/user_id/entries.yaml"
+
+  /users/{user_id}:
+    $ref: "./paths/users/user_id/user.yaml"
+
+  /users/self:
+    $ref: "./paths/users/self.yaml"
+
+  /users/self/entries:
+    $ref: "./paths/users/self/entries.yaml"
 
 components:
   parameters:

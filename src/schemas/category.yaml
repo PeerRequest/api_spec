@@ -23,4 +23,11 @@ properties:
   researcher_name:
     type: string
     example: "Karol Bender"
-  # TODO: fehlt nicht noch score (bspw. String Array für die Skala "low/mid/high")?
+  rating_scale:
+    type: object
+    properties:
+      low:
+        type: integer
+      high:
+        type: integer
+    nullable: true

@@ -1,0 +1,25 @@
+#get reviews from entry
+get:
+  tags:
+    - reviews
+  description: "Returns all reviews that are associated to the requesting user."
+  summary: "/reviews"
+  parameters:
+    - $ref: "../parameters/query/limit.yaml"
+    - $ref: "../parameters/query/after.yaml"
+
+  responses:
+    200:
+      description: "List of reviews"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../schemas/review.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
