@@ -6,7 +6,7 @@ info:
   #servers:
   # TODO: add servers here
 paths:
-  # /auth endpoints
+  # auth endpoints
   /auth/logout:
     $ref: "./paths/auth/logout.yaml"
 
@@ -39,15 +39,17 @@ paths:
   /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
 
-
-  # TODO: add paths here
-
-  # /users endpoints
+  # user endpoints
   /users/{user_id}/entries:
     $ref: "./paths/users/user_id/entries.yaml"
 
   /users/{user_id}:
     $ref: "./paths/users/user_id/user.yaml"
+
+  /users/self:
+    $ref: "./paths/users/self.yaml"
+  /users/self/entries:
+    $ref: "./paths/users/self/entries.yaml"
 
 components:
   parameters:

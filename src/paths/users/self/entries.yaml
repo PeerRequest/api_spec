@@ -1,7 +1,7 @@
 get:
   tags:
     - users
-  description: "Returns all entries of a user"
+  description: "Returns all entries of the requesting user user"
   summary: "/users/<user_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/user_id.yaml"
@@ -10,7 +10,7 @@ get:
 
   responses:
     200:
-      description: "List of entries created by the specified user"
+      description: "List of entries created by the requesting user"
       content:
         application/json:
           schema:
