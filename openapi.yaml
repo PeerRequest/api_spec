@@ -3,6 +3,12 @@ info:
   version: 1.0.0
   title: PeerRequest API
   description: PeerRequest Open API Specification.
+tags:
+  - name: auth
+  - name: categories
+  - name: entries
+  - name: reviews
+  - name: users
 paths:
   /auth/logout:
     get:
@@ -347,7 +353,7 @@ paths:
         - reviews
       description: Returns all reviews for an entry
       operationId: getReviews
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -372,7 +378,8 @@ paths:
       tags:
         - reviews
       description: Creates a review for an entry
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews'
+      operationId: createReviews
+      summary: /categories/<category_id>/entries/<entry_id>/reviews
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -397,7 +404,7 @@ paths:
         - reviews
       description: Returns a review from an entry
       operationId: getReview
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews/<review_id>'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -425,7 +432,7 @@ paths:
         - reviews
       description: Updates a review form
       operationId: patchReview
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews/<review_id>'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -451,7 +458,7 @@ paths:
         - reviews
       description: Deletes a review form
       operationId: deleteReview
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews/<review_id>'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -471,7 +478,7 @@ paths:
         - reviews
       description: Returns the documents attached to the review
       operationId: getReviewDocument
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews/<review_id>/document'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>/documents
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -494,7 +501,7 @@ paths:
         - reviews
       description: Attaches a document to a review
       operationId: addReviewDocument
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews/<review_id>/document'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -519,7 +526,7 @@ paths:
         - reviews
       description: Deletes a document attached to an review
       operationId: deleteReviewDocument
-      summary: '/categories/{category_id}/entries/{entry_id}/reviews/<review_id>/document'
+      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -538,6 +545,7 @@ paths:
       tags:
         - users
       description: Returns all entries of a user
+      operationId: getUserEntries
       summary: /users/<user_id>/entries
       parameters:
         - $ref: '#/paths/~1users~1%7Buser_id%7D/get/parameters/0'
@@ -557,6 +565,7 @@ paths:
       tags:
         - users
       description: Show the account details of a user
+      operationId: getUser
       summary: /users/<user_id>
       parameters:
         - name: user_id
@@ -577,6 +586,7 @@ paths:
       tags:
         - users
       description: Show the account details of the requesting user
+      operationId: getUserSelf
       summary: /users/self
       responses:
         '200':
@@ -584,13 +594,13 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/User'
   /users/self/entries:
     get:
       tags:
         - users
       description: Returns all entries of the requesting user user
+      operationId: getUserSelfEntries
       summary: /users/self/entries
       parameters:
         - $ref: '#/components/parameters/limit'
