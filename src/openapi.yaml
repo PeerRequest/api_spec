@@ -5,6 +5,14 @@ info:
   description: PeerRequest Open API Specification.
   #servers:
   # TODO: add servers here
+
+tags:
+  - name: auth
+  - name: categories
+  - name: entries
+  - name: reviews
+  - name: users
+
 paths:
   # auth endpoints
   /auth/logout:

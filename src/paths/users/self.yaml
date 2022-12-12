@@ -10,5 +10,4 @@ get:
       content:
         application/json:
           schema:
-            items:
-              $ref: "../../schemas/user.yaml"
+            $ref: "../../schemas/user.yaml"
