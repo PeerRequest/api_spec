@@ -2,6 +2,7 @@ get:
   tags:
     - users
   description: "Returns all entries of the requesting user user"
+  operationId: getUserSelfEntries
   summary: "/users/self/entries"
   parameters:
     - $ref: "../../../parameters/query/limit.yaml"

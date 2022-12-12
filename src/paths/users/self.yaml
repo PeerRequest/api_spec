@@ -2,6 +2,7 @@ get:
   tags:
     - users
   description: "Show the account details of the requesting user"
+  operationId: getUserSelf
   summary: "/users/self"
 
   responses:
@@ -10,5 +11,4 @@ get:
       content:
         application/json:
           schema:
-            items:
-              $ref: "../../schemas/user.yaml"
+            $ref: "../../schemas/user.yaml"
