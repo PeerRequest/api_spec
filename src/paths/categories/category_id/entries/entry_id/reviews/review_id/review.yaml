@@ -3,7 +3,7 @@ get:
     - reviews
   description: "Returns a review from an entry"
   operationId: getReview
-  summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
@@ -31,7 +31,7 @@ patch:
     - reviews
   description: "Updates a review form"
   operationId: patchReview
-  summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
@@ -63,7 +63,7 @@ delete:
     - reviews
   description: "Deletes a review form"
   operationId: deleteReview
-  summary: "/categories/{category_id}/entries/{entry_id}/reviews/<review_id>"
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"

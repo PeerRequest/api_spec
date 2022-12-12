@@ -3,7 +3,7 @@ get:
     - reviews
   description: "Returns all reviews for an entry"
   operationId: getReviews
-  summary: "/categories/{category_id}/entries/{entry_id}/reviews"
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
@@ -33,7 +33,8 @@ post:
   tags:
     - reviews
   description: "Creates a review for an entry"
-  summary: "/categories/{category_id}/entries/{entry_id}/reviews"
+  operationId: createReviews
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
