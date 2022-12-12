@@ -2,6 +2,7 @@ get:
   tags:
     - users
   description: "Returns all entries of a user"
+  operationId: getUserEntries
   summary: "/users/<user_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/user_id.yaml"
