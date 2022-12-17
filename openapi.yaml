@@ -213,7 +213,7 @@ paths:
       tags:
         - entries
       description: Adds one or more new entries to a category
-      operationId: ceateEntry
+      operationId: createEntry
       summary: /categories/<category_id>/entries
       parameters:
         - $ref: '#/components/parameters/category_id'
