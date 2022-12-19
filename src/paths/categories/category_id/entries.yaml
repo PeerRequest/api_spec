@@ -47,7 +47,7 @@ post:
         schema:
           type: array
           items:
-            $ref: "../../../schemas/entry.yaml"
+            $ref: "../../../schemas/properties/entry_properties.yaml"
 
   responses:
     200:
