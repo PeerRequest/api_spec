@@ -3,38 +3,4 @@ properties:
   id:
     type: integer
     example: 42
-  entry_id:
-    type: integer
-    example: 100
-  entry:
-    anyOf:
-      - $ref: "./entry.yaml"
-      - type: object
-        nullable: true
-  researcher_id:
-    type: integer
-    example: 100
-  researcher:
-    anyOf:
-      - $ref: "./user.yaml"
-      - type: object
-        nullable: true
-  reviewer_id:
-    type: integer
-    example: 200
-  reviewer:
-    anyOf:
-      - $ref: "./user.yaml"
-      - type: object
-        nullable: true
-  estimated_time:
-    description: "Time when the reviewer thinks they have finished the review"
-    type: string
-    example: "Tue, 29. Nov 2022"
-    format: "ddd, dd. mmm yyyy"
-  pdf_review:
-    description: "The PDF-file of the research paper but filled with comments"
-    type: object
-    nullable: true
-  review_form:
-    $ref: './review_form.yaml'
+  $ref: './properties/review_properties.yaml'
