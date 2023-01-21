@@ -48,6 +48,10 @@ patch:
   responses:
     200:
       description: "Review form edited"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../../../schemas/review.yaml"
 
     400:
       description: "Invalid Request"

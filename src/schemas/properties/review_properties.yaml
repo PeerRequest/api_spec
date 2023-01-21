@@ -1,19 +1,11 @@
 type: object
 properties:
-  entry_id:
-    type: integer
-    example: 100
-  entry:
-    anyOf:
-      - $ref: "./entry.yaml"
-      - type: object
-        nullable: true
   researcher_id:
     type: integer
     example: 100
   researcher:
     anyOf:
-      - $ref: "./user.yaml"
+      - $ref: "../user.yaml"
       - type: object
         nullable: true
   reviewer_id:
@@ -21,7 +13,7 @@ properties:
     example: 200
   reviewer:
     anyOf:
-      - $ref: "./user.yaml"
+      - $ref: "../user.yaml"
       - type: object
         nullable: true
   estimated_time:
@@ -34,4 +26,4 @@ properties:
     type: object
     nullable: true
   review_form:
-    $ref: './review_form.yaml'
+    $ref: '../review_form.yaml'

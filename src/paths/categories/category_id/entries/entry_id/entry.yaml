@@ -43,11 +43,15 @@ patch:
     content:
       application/json:
         schema:
-          $ref: "../../../../../schemas/entry.yaml"
+          $ref: "../../../../../schemas/properties/entry_properties.yaml"
 
   responses:
     200:
       description: "Entry edited"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../schemas/entry.yaml"
 
     400:
       description: "Invalid Request"

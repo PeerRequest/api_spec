@@ -39,11 +39,15 @@ patch:
     content:
       application/json:
         schema:
-          $ref: "../../../schemas/entry.yaml"
+          $ref: "../../../schemas/properties/category_properties.yaml"
 
   responses:
     200:
       description: "Category changed"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../schemas/category.yaml"
 
     400:
       description: "Invalid Request"

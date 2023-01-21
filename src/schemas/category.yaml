@@ -1,6 +1,7 @@
-type: object
-properties:
-  id:
-    type: integer
-    example: 42
-  $ref: './properties/category_properties.yaml'
+allOf:
+  - type: object
+    properties:
+      id:
+        type: integer
+        example: 42
+  - $ref: './properties/category_properties.yaml'
