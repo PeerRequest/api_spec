@@ -112,10 +112,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Category'
+              type: object
+              properties:
+                category_type:
+                  type: string
+                  enum:
+                    - Internal
+                    - External
+                year:
+                  type: integer
+                  example: 2023
+                deadline:
+                  type: string
+                  example: 'Tue, 29. Nov 2022'
+                  format: 'ddd, dd. mmm yyyy'
+                  nullable: true
+                title:
+                  type: string
+                  example: International Paper Conference
+                researcher_id:
+                  type: integer
+                  example: 100
+                researcher_name:
+                  type: string
+                  example: Karol Bender
+                rating_scale:
+                  type: object
+                  properties:
+                    low:
+                      type: integer
+                    high:
+                      type: integer
+                  nullable: true
       responses:
         '200':
           description: Category created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
         '400':
           description: Invalid Request
         '401':
@@ -156,10 +191,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Entry'
+              $ref: '#/paths/~1categories/post/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: Category changed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
         '400':
           description: Invalid Request
         '401':
@@ -225,7 +264,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Entry'
+                $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: Entry/Entries created
@@ -273,10 +312,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Entry'
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: 'Great Paper #01'
+                researcher_id:
+                  type: integer
+                  example: 100
+                researcher_name:
+                  type: string
+                  example: Karol Bender
+                category_id:
+                  type: integer
+                  example: 5
+                authors:
+                  type: string
+                  example: 'Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez'
+                slots:
+                  type: integer
+                  example: 2
+                  nullable: true
       responses:
         '200':
           description: Entry edited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
         '400':
           description: Invalid Request
         '401':
@@ -388,10 +451,42 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Review'
+              type: object
+              properties:
+                researcher_id:
+                  type: integer
+                  example: 100
+                researcher:
+                  anyOf:
+                    - $ref: '#/components/schemas/User'
+                    - type: object
+                      nullable: true
+                reviewer_id:
+                  type: integer
+                  example: 200
+                reviewer:
+                  anyOf:
+                    - $ref: '#/components/schemas/User'
+                    - type: object
+                      nullable: true
+                estimated_time:
+                  description: Time when the reviewer thinks they have finished the review
+                  type: string
+                  example: 'Tue, 29. Nov 2022'
+                  format: 'ddd, dd. mmm yyyy'
+                pdf_review:
+                  description: The PDF-file of the research paper but filled with comments
+                  type: object
+                  nullable: true
+                review_form:
+                  $ref: '#/components/schemas/Review%20Form'
       responses:
         '200':
           description: Review created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
         '400':
           description: Invalid Request
         '401':
@@ -447,6 +542,10 @@ paths:
       responses:
         '200':
           description: Review form edited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
         '400':
           description: Invalid Request
         '401':
@@ -671,66 +770,21 @@ components:
         message:
           type: string
     Entry:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 42
-        title:
-          type: string
-          example: 'Great Paper #01'
-        researcher_id:
-          type: integer
-          example: 100
-        researcher_name:
-          type: string
-          example: Karol Bender
-        category_id:
-          type: integer
-          example: 5
-        authors:
-          type: string
-          example: 'Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez'
-        slots:
-          type: integer
-          example: 2
-          nullable: true
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 42
-        category_type:
-          type: string
-          enum:
-            - Internal
-            - External
-        year:
-          type: integer
-          example: 2023
-        deadline:
-          type: string
-          example: 'Tue, 29. Nov 2022'
-          format: 'ddd, dd. mmm yyyy'
-          nullable: true
-        title:
-          type: string
-          example: International Paper Conference
-        researcher_id:
-          type: integer
-          example: 100
-        researcher_name:
-          type: string
-          example: Karol Bender
-        rating_scale:
-          type: object
+      allOf:
+        - type: object
           properties:
-            low:
+            id:
               type: integer
-            high:
+              example: 42
+        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
+    Category:
+      allOf:
+        - type: object
+          properties:
+            id:
               type: integer
-          nullable: true
+              example: 42
+        - $ref: '#/paths/~1categories/post/requestBody/content/application~1json/schema'
     User:
       type: object
       properties:
@@ -744,46 +798,18 @@ components:
           type: string
           example: roosevelt.booth@example.org
     Review:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 42
-        entry_id:
-          type: integer
-          example: 100
-        entry:
-          anyOf:
-            - $ref: '#/components/schemas/Entry'
-            - type: object
-              nullable: true
-        researcher_id:
-          type: integer
-          example: 100
-        researcher:
-          anyOf:
-            - $ref: '#/components/schemas/User'
-            - type: object
-              nullable: true
-        reviewer_id:
-          type: integer
-          example: 200
-        reviewer:
-          anyOf:
-            - $ref: '#/components/schemas/User'
-            - type: object
-              nullable: true
-        estimated_time:
-          description: Time when the reviewer thinks they have finished the review
-          type: string
-          example: 'Tue, 29. Nov 2022'
-          format: 'ddd, dd. mmm yyyy'
-        pdf_review:
-          description: The PDF-file of the research paper but filled with comments
-          type: object
-          nullable: true
-        review_form:
-          $ref: '#/components/schemas/Review%20Form'
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              example: 42
+            entry_id:
+              type: integer
+              example: 100
+            entry:
+              $ref: '#/components/schemas/Entry'
+        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews/post/requestBody/content/application~1json/schema'
     Review Form:
       type: object
       properties:
