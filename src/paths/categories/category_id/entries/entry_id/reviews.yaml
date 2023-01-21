@@ -44,11 +44,15 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../../../../schemas/review.yaml"
+          $ref: "../../../../../schemas/properties/review_properties.yaml"
 
   responses:
     200:
       description: "Review created"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../schemas/review.yaml"
 
     400:
       description: "Invalid Request"

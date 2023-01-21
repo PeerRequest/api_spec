@@ -1,33 +1,7 @@
-type: object
-properties:
-  id:
-    type: integer
-    example: 42
-  category_type:
-    type: string
-    enum: [ "Internal", "External" ]
-  year:
-    type: integer
-    example: 2023
-  deadline:
-    type: string
-    example: "Tue, 29. Nov 2022"
-    format: "ddd, dd. mmm yyyy"
-    nullable: true
-  title:
-    type: string
-    example: "International Paper Conference"
-  researcher_id:
-    type: integer
-    example: 100
-  researcher_name:
-    type: string
-    example: "Karol Bender"
-  rating_scale:
-    type: object
+allOf:
+  - type: object
     properties:
-      low:
+      id:
         type: integer
-      high:
-        type: integer
-    nullable: true
+        example: 42
+  - $ref: './properties/category_properties.yaml'

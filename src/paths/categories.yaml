@@ -36,10 +36,14 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/category.yaml"
+          $ref: "../schemas/properties/category_properties.yaml"
   responses:
     200:
       description: "Category created"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/category.yaml"
     400:
       description: "Invalid Request"
     401:
