@@ -10,7 +10,7 @@ tags:
   - name: reviews
   - name: users
 paths:
-  /auth/logout:
+  /api/logout:
     get:
       tags:
         - auth
@@ -20,64 +20,7 @@ paths:
       responses:
         '200':
           description: User successfully logged out
-  /auth/login:
-    get:
-      tags:
-        - auth
-      description: Redirects the user to an auth server
-      operationId: loginRedirect
-      summary: /auth/login
-      parameters:
-        - $ref: '#/components/parameters/auth_service'
-      responses:
-        '302':
-          description: Redirect to the specified or default auth service
-        '400':
-          description: Invalid auth_service
-  /auth/callback:
-    get:
-      tags:
-        - auth
-      description: OAuth2 Authentication Callback
-      operationId: authCallback
-      summary: /auth/callback
-      parameters:
-        - name: code
-          in: query
-          description: auth code give by an auth server to exchange for a token
-          required: true
-          schema:
-            type: string
-        - name: state
-          in: query
-          description: auth state returned by an auth server
-          required: true
-          schema:
-            type: string
-        - name: scope
-          in: query
-          description: contains granted scopes
-          required: true
-          schema:
-            type: string
-        - name: error
-          in: query
-          description: contains an error indicating why authorization failed
-          required: false
-          schema:
-            type: string
-        - name: error_description
-          in: query
-          description: contains an error description
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successfully logged in (will set a session cookie)
-        '400':
-          description: Malformed request or invalid flow
-  /categories:
+  /api/categories:
     get:
       tags:
         - categories
@@ -155,7 +98,7 @@ paths:
           description: Invalid Request
         '401':
           description: Unauthorized
-  '/categories/{category_id}':
+  '/api/categories/{category_id}':
     get:
       tags:
         - categories
@@ -191,7 +134,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1categories/post/requestBody/content/application~1json/schema'
+              $ref: '#/paths/~1api~1categories/post/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: Category changed
@@ -222,7 +165,7 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category does not exist
-  '/categories/{category_id}/entries':
+  '/api/categories/{category_id}/entries':
     get:
       tags:
         - entries
@@ -264,7 +207,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
+                $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
       responses:
         '200':
           description: Entry/Entries created
@@ -274,7 +217,7 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category does not exist
-  '/categories/{category_id}/entries/{entry_id}':
+  '/api/categories/{category_id}/entries/{entry_id}':
     get:
       tags:
         - entries
@@ -364,7 +307,7 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category or entry does not exist
-  '/categories/{category_id}/entries/{entry_id}/paper':
+  '/api/categories/{category_id}/entries/{entry_id}/paper':
     get:
       tags:
         - entries
@@ -387,7 +330,7 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category or entry does not exist
-  /reviews:
+  /api/reviews:
     get:
       tags:
         - reviews
@@ -410,7 +353,7 @@ paths:
           description: Invalid Request
         '401':
           description: Unauthorized
-  '/categories/{category_id}/entries/{entry_id}/reviews':
+  '/api/categories/{category_id}/entries/{entry_id}/reviews':
     get:
       tags:
         - reviews
@@ -493,7 +436,7 @@ paths:
           description: Unauthorized
         '404':
           description: The specified entry or category does not exist
-  '/categories/{category_id}/entries/{entry_id}/reviews/{review_id}':
+  '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}':
     get:
       tags:
         - reviews
@@ -531,7 +474,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
       requestBody:
         description: Changes of the review form
         required: true
@@ -561,7 +504,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
       responses:
         '200':
           description: Review deleted
@@ -571,7 +514,7 @@ paths:
           description: Unauthorized
         '404':
           description: 'The specified review, entry or category does not exist'
-  '/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document':
+  '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document':
     get:
       tags:
         - reviews
@@ -581,7 +524,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
       responses:
         '200':
           description: Document
@@ -604,7 +547,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
       requestBody:
         description: new document
         content:
@@ -629,7 +572,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
       responses:
         '200':
           description: Document successfully deleted
@@ -639,7 +582,7 @@ paths:
           description: Unauthorized
         '404':
           description: 'The specified review, entry or category does not exist'
-  '/users/{user_id}/entries':
+  '/api/users/{user_id}/entries':
     get:
       tags:
         - users
@@ -647,7 +590,7 @@ paths:
       operationId: getUserEntries
       summary: /users/<user_id>/entries
       parameters:
-        - $ref: '#/paths/~1users~1%7Buser_id%7D/get/parameters/0'
+        - $ref: '#/paths/~1api~1users~1%7Buser_id%7D/get/parameters/0'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/after'
       responses:
@@ -659,7 +602,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Entry'
-  '/users/{user_id}':
+  '/api/users/{user_id}':
     get:
       tags:
         - users
@@ -680,7 +623,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /users/self:
+  /api/users/self:
     get:
       tags:
         - users
@@ -694,7 +637,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-  /users/self/entries:
+  /api/users/self/entries:
     get:
       tags:
         - users
@@ -776,7 +719,7 @@ components:
             id:
               type: integer
               example: 42
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
     Category:
       allOf:
         - type: object
@@ -784,7 +727,7 @@ components:
             id:
               type: integer
               example: 42
-        - $ref: '#/paths/~1categories/post/requestBody/content/application~1json/schema'
+        - $ref: '#/paths/~1api~1categories/post/requestBody/content/application~1json/schema'
     User:
       type: object
       properties:
@@ -809,7 +752,7 @@ components:
               example: 100
             entry:
               $ref: '#/components/schemas/Entry'
-        - $ref: '#/paths/~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews/post/requestBody/content/application~1json/schema'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews/post/requestBody/content/application~1json/schema'
     Review Form:
       type: object
       properties:
