@@ -1,0 +1,5 @@
+type: object
+properties:
+  entry_id:
+    type: long
+    example: 42
