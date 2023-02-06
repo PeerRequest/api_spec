@@ -6,7 +6,7 @@ properties:
   year:
     type: integer
     example: 2023
-  category_label:
+  label:
     type: string
     enum: [ "Internal", "External" ]
     required: true
