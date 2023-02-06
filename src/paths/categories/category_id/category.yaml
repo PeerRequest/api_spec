@@ -24,40 +24,6 @@ get:
     404:
       description: "The requested category does not exist"
 
-patch:
-  tags:
-    - categories
-  description: "Changes details of a category"
-  operationId: patchCategory
-  summary: "/categories/<category_id>"
-  parameters:
-    - $ref: "../../../parameters/path/category_id.yaml"
-
-  requestBody:
-    description: "Changed details of the category"
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../../../schemas/properties/category_properties.yaml"
-
-  responses:
-    200:
-      description: "Category changed"
-      content:
-        application/json:
-          schema:
-            $ref: "../../../schemas/category.yaml"
-
-    400:
-      description: "Invalid Request"
-
-    401:
-      description: "Unauthorized"
-
-    404:
-      description: "The requested category does not exist"
-
 delete:
   tags:
     - categories
