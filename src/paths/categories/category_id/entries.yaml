@@ -47,11 +47,20 @@ post:
         schema:
           type: array
           items:
-            $ref: "../../../schemas/properties/entry_properties.yaml"
+            allOf:
+              - $ref: "../../../schemas/properties/document_id_full.yaml"
+              - $ref: "../../../schemas/properties/entry_properties.yaml"
+              - required: ["name", "document_id"]
 
   responses:
     200:
       description: "Entry/Entries created"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../../../schemas/entry.yaml"
 
     400:
       description: "Invalid Request"
@@ -61,3 +70,42 @@ post:
 
     404:
       description: "The requested category does not exist"
+
+#update entry
+patch:
+  tags:
+    - entries
+  description: "Changes details of an entry"
+  operationId: patchEntry
+  summary: "/categories/<category_id>/entries"
+  parameters:
+    - $ref: "../../../parameters/path/category_id.yaml"
+    - $ref: "../../../parameters/path/entry_id.yaml"
+
+  requestBody:
+    description: "Changed details of the entry"
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../../schemas/properties/entry_id_full.yaml"
+            - $ref: "../../../schemas/properties/entry_properties.yaml"
+            - required: ["entry_id"]
+
+  responses:
+    200:
+      description: "Entry edited"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../schemas/entry.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"

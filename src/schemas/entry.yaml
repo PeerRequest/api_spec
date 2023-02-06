@@ -1,7 +1,6 @@
 allOf:
-  - type: object
-    properties:
-      id:
-        type: integer
-        example: 42
+  - $ref: "./properties/entry_id.yaml"
+  - $ref: "./properties/category_id_full.yaml"     
+  - $ref: "./properties/researcher_id.yaml"
+  - $ref: "./properties/document_id_full.yaml"
   - $ref: "./properties/entry_properties.yaml"
