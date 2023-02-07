@@ -1,0 +1,5 @@
+allOf:
+  - $ref: "./properties/direct_request_id.yaml"
+  - $ref: "./properties/direct_request_properties.yaml"
+  - $ref: "./properties/reviewer_id.yaml"
+  - $ref: "./properties/direct_request_process_id_full.yaml"

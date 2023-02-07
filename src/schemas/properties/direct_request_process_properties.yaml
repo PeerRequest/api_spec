@@ -1,0 +1,5 @@
+type: object
+properties:
+  open_slots:
+    type: integer
+    example: 4
