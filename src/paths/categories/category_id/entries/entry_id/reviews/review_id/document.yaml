@@ -26,7 +26,7 @@ get:
     404:
       description: "There is no document attached to this review or the specified review, entry or category does not exist"
 
-put:
+post:
   tags:
     - reviews
   description: "Attaches a document to a review"
