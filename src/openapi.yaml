@@ -7,7 +7,6 @@ info:
   # TODO: add servers here
 
 tags:
-  - name: auth
   - name: categories
   - name: entries
   - name: direct_requests
@@ -16,16 +15,6 @@ tags:
   - name: users
 
 paths:
-  # auth endpoints
-  /auth/logout:
-    $ref: "./paths/auth/logout.yaml"
-
-  /auth/login:
-    $ref: "./paths/auth/login.yaml"
-
-  /auth/callback:
-    $ref: "./paths/auth/callback.yaml"
-
   # category endpoints
   /categories:
     $ref: "./paths/categories.yaml"
