@@ -1,0 +1,5 @@
+type: object
+properties:
+  creator_id:
+    type: string
+    example: "42fsf234"
