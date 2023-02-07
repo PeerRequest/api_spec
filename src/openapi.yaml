@@ -10,6 +10,7 @@ tags:
   - name: auth
   - name: categories
   - name: entries
+  - name: direct_requests
   - name: reviews
   - name: messages
   - name: users
@@ -41,6 +42,19 @@ paths:
 
   /categories/{category_id}/entries/{entry_id}/paper:
     $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
+
+  # direct request controller
+  /categories/{category_id}/entries/{entry_id}/process:
+    $ref: "./paths/categories/category_id/entries/entry_id/process.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/process/requests:
+    $ref: "./paths/categories/category_id/entries/entry_id/process/requests.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/process/claim:
+    $ref: "./paths/categories/category_id/entries/entry_id/process/claim.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/process/requests/{request_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/process/requests/request_id/request.yaml"
 
   # review endpoints
   /reviews:
