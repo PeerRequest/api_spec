@@ -3,7 +3,7 @@ get:
     - reviews
   description: "Returns the documents attached to the review"
   operationId: getReviewDocument
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/documents"
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
