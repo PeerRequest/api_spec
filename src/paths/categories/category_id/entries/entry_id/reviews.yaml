@@ -28,3 +28,41 @@ get:
 
     404:
       description: "The specified entry or category does not exist"
+
+patch:
+  tags:
+    - reviews
+  description: "Updates a review form"
+  operationId: patchReview
+  summary: "/categories/<category_id>/entries/<entry_id>/reviews/"
+  parameters:
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
+
+  requestBody:
+    description: "Changes of the review form. A researcher may only alter the answers_from_authors field. A reviewer may only alter every other optional field"
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../../../../schemas/properties/review_id.yaml"
+            - $ref: "../../../../../schemas/properties/review_properties.yaml"
+            - required: ["id"]
+
+  responses:
+    200:
+      description: "Review form edited"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../schemas/review.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The specified review, entry or category does not exist"
