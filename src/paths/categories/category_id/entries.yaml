@@ -30,6 +30,34 @@ get:
       description: "The requested category does not exist"
 
 #create entry
+put:
+  tags:
+    - entries
+  description: "Adds a paper to the database"
+  operationId: addPaper
+  summary: "/categories/<category_id>/entries"
+  parameters:
+    - $ref: "../../../parameters/path/category_id.yaml"
+
+  requestBody:
+    description: "paper.pdf"
+    required: true
+    content: "paper.pdf"
+
+  responses:
+    200:
+      description: "Paper added"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category does not exist"      
+
+#create entry
 post:
   tags:
     - entries
