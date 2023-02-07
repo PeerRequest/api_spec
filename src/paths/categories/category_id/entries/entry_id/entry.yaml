@@ -11,7 +11,7 @@ get:
 
   responses:
     200:
-      description: "Entry of the specified category"
+      description: "Specified Entry"
       content:
         application/json:
           schema:

@@ -38,7 +38,7 @@ post:
         schema:
           allOf:
             - $ref: "../schemas/properties/category_properties.yaml"
-            - required: ["name", "year", "category_label", "min_score", "max_score", "score_step_size"]
+            - required: ["name", "year", "label", "min_score", "max_score", "score_step_size"]
   
   responses:
     200:
