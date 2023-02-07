@@ -23,6 +23,9 @@ paths:
     $ref: "./paths/categories/category_id/category.yaml"
 
   # entry endpoints
+  /entries:
+    $ref: "./paths/entries.yaml"
+
   /categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 
@@ -33,6 +36,9 @@ paths:
     $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
 
   # direct request controller
+  /requests:
+    $ref: "./paths/requests.yaml"
+
   /categories/{category_id}/entries/{entry_id}/process:
     $ref: "./paths/categories/category_id/entries/entry_id/process.yaml"
 
@@ -66,17 +72,6 @@ paths:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/messages/message_id/message.yaml"
 
   # user endpoints
-  /users/{user_id}/entries:
-    $ref: "./paths/users/user_id/entries.yaml"
-
-  /users/{user_id}:
-    $ref: "./paths/users/user_id/user.yaml"
-
-  /users/self:
-    $ref: "./paths/users/self.yaml"
-
-  /users/self/entries:
-    $ref: "./paths/users/self/entries.yaml"
 
 components:
   parameters:
