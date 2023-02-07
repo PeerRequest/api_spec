@@ -19,7 +19,7 @@ paths:
   /categories:
     $ref: "./paths/categories.yaml"
 
-  /categories/{category_id}:
+  /api/categories/{category_id}:
     $ref: "./paths/categories/category_id/category.yaml"
 
   # entry endpoints
@@ -29,10 +29,10 @@ paths:
   /categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 
-  /categories/{category_id}/entries/{entry_id}:
+  /api/categories/{category_id}/entries/{entry_id}:
     $ref: "./paths/categories/category_id/entries/entry_id/entry.yaml"
 
-  /categories/{category_id}/entries/{entry_id}/paper:
+  /api/categories/{category_id}/entries/{entry_id}/paper:
     $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
 
   # direct request controller
@@ -55,13 +55,13 @@ paths:
   /reviews:
     $ref: "./paths/reviews.yaml"
 
-  /categories/{category_id}/entries/{entry_id}/reviews:
+  /api/categories/{category_id}/entries/{entry_id}/reviews:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews.yaml"
 
-  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}:
+  /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/review.yaml"
 
-  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
+  /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
   
   # message endpoints
