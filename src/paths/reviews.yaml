@@ -1,7 +1,7 @@
 #get reviews from entry
 get:
   tags:
-    - reviews
+    - users
   description: "Returns all reviews that are associated to the requesting user."
   operationId: getUserReviews
   summary: "/reviews"
