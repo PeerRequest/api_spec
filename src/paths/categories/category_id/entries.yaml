@@ -89,7 +89,7 @@ patch:
       application/json:
         schema:
           allOf:
-            - $ref: "../../../schemas/properties/entry_id_full.yaml"
+            - $ref: "../../../schemas/properties/entry_id.yaml"
             - $ref: "../../../schemas/properties/entry_properties.yaml"
             - required: ["entry_id"]
 
