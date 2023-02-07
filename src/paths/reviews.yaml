@@ -14,9 +14,14 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: "../schemas/review.yaml"
+            allOf:
+              - $ref: "../schemas/page.yaml"
+              - type object:
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: "../schemas/review.yaml"
 
     400:
       description: "Invalid Request"
