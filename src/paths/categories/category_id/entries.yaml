@@ -95,7 +95,7 @@ patch:
 
   responses:
     200:
-      description: "Entry edited"
+      description: "Entry changed"
       content:
         application/json:
           schema:

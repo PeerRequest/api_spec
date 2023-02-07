@@ -72,7 +72,7 @@ post:
 patch:
   tags:
     - messages
-  description: "Updates a message"
+  description: "Changes a message"
   operationId: patchMessage
   summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
   parameters:
@@ -81,7 +81,7 @@ patch:
     - $ref: "../../../../../../../parameters/path/review_id.yaml"
 
   requestBody:
-    description: "Updates a message"
+    description: "Changed details of the message"
     required: true
     content:
       application/json:
@@ -93,7 +93,7 @@ patch:
 
   responses:
     200:
-      description: "Changes of the message"
+      description: "Message changed"
       content:
         application/json:
           schema:

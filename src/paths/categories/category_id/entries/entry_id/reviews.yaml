@@ -32,7 +32,7 @@ get:
 patch:
   tags:
     - reviews
-  description: "Updates a review"
+  description: "Changes a review"
   operationId: patchReview
   summary: "/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
@@ -40,7 +40,7 @@ patch:
     - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   requestBody:
-    description: "Changes of the review form. A researcher may only alter the answers_from_authors field. A reviewer may only alter every other optional field"
+    description: "Changed details of a review. A researcher may only alter the answers_from_authors field. A reviewer may only alter every other optional field"
     required: true
     content:
       application/json:
@@ -52,7 +52,7 @@ patch:
 
   responses:
     200:
-      description: "Review form edited"
+      description: "Review changed"
       content:
         application/json:
           schema:
