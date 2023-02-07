@@ -8,7 +8,7 @@ properties:
     example: 2023
   label:
     type: string
-    enum: [ "Internal", "External" ]
+    enum: [ "INTERNAL", "EXTERNAL" ]
     required: true
   deadline:
     type: string
