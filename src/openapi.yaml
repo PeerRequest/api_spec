@@ -11,6 +11,7 @@ tags:
   - name: categories
   - name: entries
   - name: reviews
+  - name: messages
   - name: users
 
 paths:
@@ -53,6 +54,13 @@ paths:
 
   /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
+  
+  # message endpoints
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/messages.yaml"
+
+  /categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages/{message_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/messages/message_id/message.yaml"
 
   # user endpoints
   /users/{user_id}/entries:
