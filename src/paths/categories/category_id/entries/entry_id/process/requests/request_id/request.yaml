@@ -3,7 +3,7 @@ delete:
     - direct_requests
   description: "deletes a direct request only if request is not accepted"
   operationId: deleteDirectRequests
-  summary: "/categories/<category_id>/entries/<entry_id>/process/requests/<request_id>"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process/requests/<request_id>"
   parameters:
     - $ref: "../../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../../parameters/path/entry_id.yaml"

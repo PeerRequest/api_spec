@@ -3,7 +3,7 @@ get:
     - direct_requests
   description: "Returns all direct requests of an entry"
   operationId: getDirectRequests
-  summary: "/categories/<category_id>/entries/<entry_id>/process/requests"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process/requests"
   parameters:
     - $ref: "../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../parameters/path/entry_id.yaml"
@@ -39,7 +39,7 @@ patch:
     - direct_requests
   description: "Changes the details of a direct request"
   operationId: patchDirectRequests
-  summary: "/categories/<category_id>/entries/<entry_id>/process/requests"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process/requests"
   parameters:
     - $ref: "../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../parameters/path/entry_id.yaml"

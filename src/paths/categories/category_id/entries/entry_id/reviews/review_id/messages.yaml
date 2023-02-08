@@ -3,7 +3,7 @@ get:
     - messages
   description: "Returns all messages of a review"
   operationId: getMessage
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
@@ -38,7 +38,7 @@ post:
     - messages
   description: "Adds a message to the message board of a review"
   operationId: createMessage
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
@@ -79,7 +79,7 @@ patch:
     - messages
   description: "Changes a message"
   operationId: patchMessage
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"

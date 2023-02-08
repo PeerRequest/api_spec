@@ -3,7 +3,7 @@ post:
     - direct_requests
   description: "Claims an open slot"
   operationId: claimDirectRequests
-  summary: "/categories/<category_id>/entries/<entry_id>/process/claim"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process/claim"
   parameters:
     - $ref: "../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../parameters/path/entry_id.yaml"

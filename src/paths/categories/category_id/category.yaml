@@ -3,7 +3,7 @@ get:
     - categories
   description: "Returns a category"
   operationId: getCategory
-  summary: "/categories/<category_id>"
+  summary: "/api/categories/<category_id>"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
 
@@ -29,7 +29,7 @@ delete:
     - categories
   description: "Deletes a category"
   operationId: deleteCategory
-  summary: "/categories/<category_id>"
+  summary: "/api/categories/<category_id>"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
 

@@ -3,7 +3,7 @@ get:
     - users
   description: "Returns all reviews that are associated to the requesting user"
   operationId: getUserReviews
-  summary: "/reviews"
+  summary: "/api/reviews"
   parameters:
     - $ref: "../parameters/query/limit.yaml"
     - $ref: "../parameters/query/after.yaml"

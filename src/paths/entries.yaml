@@ -3,7 +3,7 @@ get:
     - users
   description: "Returns all entries that are associated to the requesting user"
   operationId: getUserEntries
-  summary: "/entries"
+  summary: "/api/entries"
   parameters:
     - $ref: "../parameters/query/limit.yaml"
     - $ref: "../parameters/query/after.yaml"

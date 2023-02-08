@@ -3,7 +3,7 @@ get:
     - reviews
   description: "Returns all reviews for an entry"
   operationId: getReviews
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"

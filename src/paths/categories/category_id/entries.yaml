@@ -4,7 +4,7 @@ get:
     - entries
   description: "Returns all entries in a category"
   operationId: getEntries
-  summary: "/categories/<category_id>/entries"
+  summary: "/api/categories/<category_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
     - $ref: "../../../parameters/query/limit.yaml"
@@ -40,7 +40,7 @@ post:
     - entries
   description: "Adds one or more new entries to a category"
   operationId: createEntry
-  summary: "/categories/<category_id>/entries"
+  summary: "/api/categories/<category_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
 
@@ -82,7 +82,7 @@ patch:
     - entries
   description: "Changes details of an entry"
   operationId: patchEntry
-  summary: "/categories/<category_id>/entries"
+  summary: "/api/categories/<category_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
     - $ref: "../../../parameters/path/entry_id.yaml"

@@ -3,7 +3,7 @@ delete:
     - messages
   description: "Deletes a message"
   operationId: deleteMessage
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages/<message_id>"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages/<message_id>"
   parameters:
     - $ref: "../../../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../../../parameters/path/entry_id.yaml"

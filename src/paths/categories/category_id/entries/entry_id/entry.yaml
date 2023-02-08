@@ -4,7 +4,7 @@ get:
     - entries
   description: "Returns one entry from a category"
   operationId: getEntry
-  summary: "/categories/<category_id>/entries/<entry_id>"
+  summary: "/api/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
@@ -32,7 +32,7 @@ delete:
     - entries
   description: "Deletes an entry"
   operationId: deleteEntry
-  summary: "/categories/<category_id>/entries/<entry_id>"
+  summary: "/api/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"

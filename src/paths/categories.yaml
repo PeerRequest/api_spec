@@ -3,7 +3,7 @@ get:
     - categories
   description: "Returns all categories"
   operationId: getCategories
-  summary: "/categories"
+  summary: "/api/categories"
   parameters:
     - $ref: "../parameters/query/limit.yaml"
     - $ref: "../parameters/query/after.yaml"
@@ -34,7 +34,7 @@ post:
     - categories
   description: "Creates a new category"
   operationId: createCategory
-  summary: "/categories"
+  summary: "/api/categories"
   requestBody:
     description: "New category"
     required: true
@@ -62,7 +62,7 @@ patch:
     - categories
   description: "Changes details of a category"
   operationId: patchCategory
-  summary: "/categories"
+  summary: "/api/categories"
 
   requestBody:
     description: "Changed details of the category"
