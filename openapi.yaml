@@ -4,29 +4,20 @@ info:
   title: PeerRequest API
   description: PeerRequest Open API Specification.
 tags:
-  - name: auth
   - name: categories
   - name: entries
+  - name: direct_requests
   - name: reviews
+  - name: messages
   - name: users
 paths:
-  /api/logout:
-    get:
-      tags:
-        - auth
-      description: Logout the current user
-      operationId: logout
-      summary: /auth/logout
-      responses:
-        '200':
-          description: User successfully logged out
   /api/categories:
     get:
       tags:
         - categories
       description: Returns all categories
       operationId: getCategories
-      summary: /categories
+      summary: /api/categories
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/after'
@@ -36,9 +27,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Category'
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Category'
         '400':
           description: Invalid Request
         '401':
@@ -48,45 +44,48 @@ paths:
         - categories
       description: Creates a new category
       operationId: createCategory
-      summary: /categories
+      summary: /api/categories
       requestBody:
         description: New category
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                category_type:
-                  type: string
-                  enum:
-                    - Internal
-                    - External
-                year:
-                  type: integer
-                  example: 2023
-                deadline:
-                  type: string
-                  example: 'Tue, 29. Nov 2022'
-                  format: 'ddd, dd. mmm yyyy'
-                  nullable: true
-                title:
-                  type: string
-                  example: International Paper Conference
-                researcher_id:
-                  type: integer
-                  example: 100
-                researcher_name:
-                  type: string
-                  example: Karol Bender
-                rating_scale:
-                  type: object
+              allOf:
+                - type: object
                   properties:
-                    low:
+                    name:
+                      type: string
+                      example: International Paper Conference
+                    year:
                       type: integer
-                    high:
-                      type: integer
-                  nullable: true
+                      example: 2023
+                    label:
+                      type: string
+                      enum:
+                        - INTERNAL
+                        - EXTERNAL
+                      required: true
+                    deadline:
+                      type: string
+                      example: '2021-03-23T10:43:32+02:00'
+                      format: 'yyyy-mm-ddTh:min:sec+[timezone]'
+                    min_score:
+                      type: float
+                      example: 0.5
+                    max_score:
+                      type: float
+                      example: 5
+                    score_step_size:
+                      type: float
+                      example: 0.25
+                - required:
+                    - name
+                    - year
+                    - label
+                    - min_score
+                    - max_score
+                    - score_step_size
       responses:
         '200':
           description: Category created
@@ -98,13 +97,47 @@ paths:
           description: Invalid Request
         '401':
           description: Unauthorized
+    patch:
+      tags:
+        - categories
+      description: Changes details of a category
+      operationId: patchCategory
+      summary: /api/categories
+      requestBody:
+        description: Changed details of the category
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: long
+                      example: 42
+                - required:
+                    - id
+                - $ref: '#/paths/~1api~1categories/post/requestBody/content/application~1json/schema/allOf/0'
+      responses:
+        '200':
+          description: Category changed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category does not exist
   '/api/categories/{category_id}':
     get:
       tags:
         - categories
       description: Returns a category
       operationId: getCategory
-      summary: /categories/<category_id>
+      summary: /api/categories/<category_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
       responses:
@@ -120,24 +153,17 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category does not exist
-    patch:
+    delete:
       tags:
         - categories
-      description: Changes details of a category
-      operationId: patchCategory
-      summary: /categories/<category_id>
+      description: Deletes a category
+      operationId: deleteCategory
+      summary: /api/categories/<category_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
-      requestBody:
-        description: Changed details of the category
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/paths/~1api~1categories/post/requestBody/content/application~1json/schema'
       responses:
         '200':
-          description: Category changed
+          description: Deleted Category
           content:
             application/json:
               schema:
@@ -148,30 +174,51 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category does not exist
-    delete:
+  /api/entries:
+    get:
       tags:
-        - categories
-      description: Deletes a category
-      operationId: deleteCategory
-      summary: /categories/<category_id>
+        - users
+      description: Returns all entries that are associated to the requesting user
+      operationId: getUserEntries
+      summary: /api/entries
       parameters:
-        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/after'
       responses:
         '200':
-          description: Category deleted
+          description: List of entries
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      page_size:
+                        type: int
+                        example: 100
+                      current_page:
+                        type: int
+                        example: 2
+                      last_page:
+                        type: int
+                        example: 40
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Entry'
         '400':
           description: Invalid Request
         '401':
           description: Unauthorized
-        '404':
-          description: The requested category does not exist
   '/api/categories/{category_id}/entries':
     get:
       tags:
         - entries
       description: Returns all entries in a category
       operationId: getEntries
-      summary: /categories/<category_id>/entries
+      summary: /api/categories/<category_id>/entries
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/limit'
@@ -179,6 +226,52 @@ paths:
       responses:
         '200':
           description: List of entries of the specified category
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Entry'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category does not exist
+    post:
+      tags:
+        - entries
+      description: Adds one or more new entries to a category
+      operationId: createEntry
+      summary: /api/categories/<category_id>/entries
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+      requestBody:
+        description: New entry/entries
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                allOf:
+                  - type: object
+                    properties:
+                      document_id:
+                        type: string
+                        example: '420'
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries/patch/requestBody/content/application~1json/schema/allOf/1'
+                  - required:
+                      - name
+                      - document_id
+      responses:
+        '200':
+          description: Entry/Entries created
           content:
             application/json:
               schema:
@@ -191,45 +284,40 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category does not exist
-    post:
+    patch:
       tags:
         - entries
-      description: Adds one or more new entries to a category
-      operationId: createEntry
-      summary: /categories/<category_id>/entries
+      description: Changes details of an entry
+      operationId: patchEntry
+      summary: /api/categories/<category_id>/entries
       parameters:
         - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
       requestBody:
-        description: New entry/entries
+        description: Changed details of the entry
         required: true
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
+              allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: long
+                      example: 42
+                - type: object
+                  properties:
+                    name:
+                      type: string
+                      example: 'Great Paper #01'
+                    authors:
+                      type: string
+                      example: 'Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez'
+                - required:
+                    - id
       responses:
         '200':
-          description: Entry/Entries created
-        '400':
-          description: Invalid Request
-        '401':
-          description: Unauthorized
-        '404':
-          description: The requested category does not exist
-  '/api/categories/{category_id}/entries/{entry_id}':
-    get:
-      tags:
-        - entries
-      description: Returns one entry from a category
-      operationId: getEntry
-      summary: /categories/<category_id>/entries/<entry_id>
-      parameters:
-        - $ref: '#/components/parameters/category_id'
-        - $ref: '#/components/parameters/entry_id'
-      responses:
-        '200':
-          description: Entry of the specified category
+          description: Entry changed
           content:
             application/json:
               schema:
@@ -240,45 +328,19 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category or entry does not exist
-    patch:
+  '/api/categories/{category_id}/entries/{entry_id}':
+    get:
       tags:
         - entries
-      description: Changes details of an entry
-      operationId: patchEntry
-      summary: /categories/<category_id>/entries/<entry_id>
+      description: Returns one entry from a category
+      operationId: getEntry
+      summary: /api/categories/<category_id>/entries/<entry_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-      requestBody:
-        description: Changed details of the entry
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  example: 'Great Paper #01'
-                researcher_id:
-                  type: integer
-                  example: 100
-                researcher_name:
-                  type: string
-                  example: Karol Bender
-                category_id:
-                  type: integer
-                  example: 5
-                authors:
-                  type: string
-                  example: 'Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez'
-                slots:
-                  type: integer
-                  example: 2
-                  nullable: true
       responses:
         '200':
-          description: Entry edited
+          description: Specified Entry
           content:
             application/json:
               schema:
@@ -294,13 +356,17 @@ paths:
         - entries
       description: Deletes an entry
       operationId: deleteEntry
-      summary: /categories/<category_id>/entries/<entry_id>
+      summary: /api/categories/<category_id>/entries/<entry_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
       responses:
         '200':
-          description: Entry deleted
+          description: Deleted Entry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
         '400':
           description: Invalid Request
         '401':
@@ -313,7 +379,7 @@ paths:
         - entries
       description: Returns the paper of an entry from a category
       operationId: getPaper
-      summary: /categories/<category_id>/entries/<entry_id>/paper
+      summary: /api/categories/<category_id>/entries/<entry_id>/paper
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -330,13 +396,272 @@ paths:
           description: Unauthorized
         '404':
           description: The requested category or entry does not exist
+  /api/requests:
+    get:
+      tags:
+        - users
+      description: Returns all requests that are associated to the requesting user
+      operationId: getUserRequests
+      summary: /api/requests
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/after'
+      responses:
+        '200':
+          description: List of requests
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1claim/post/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+  '/api/categories/{category_id}/entries/{entry_id}/process':
+    get:
+      tags:
+        - direct_requests
+      description: Returns the direct request process of an entry
+      operationId: getDirectRequestProcess
+      summary: /api/categories/<category_id>/entries/<entry_id>/process
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      responses:
+        '200':
+          description: Specified direct request process
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      id:
+                        type: long
+                        example: 3
+                  - $ref: '#/components/schemas/Review/allOf/2'
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process/post/requestBody/content/application~1json/schema/allOf/0'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+    post:
+      tags:
+        - direct_requests
+      description: Adds a direct request process to an entry
+      operationId: createDirectRequestProcess
+      summary: /api/categories/<category_id>/entries/<entry_id>/process
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      requestBody:
+        description: New direct request process
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  properties:
+                    open_slots:
+                      type: integer
+                      example: 4
+                - required:
+                    - open_slots
+      responses:
+        '200':
+          description: Direct request process created
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process/get/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+    patch:
+      tags:
+        - direct_requests
+      description: Changes a direct request process
+      operationId: patchDirectRequestProcess
+      summary: /api/categories/<category_id>/entries/<entry_id>/process
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      requestBody:
+        description: changed details of the direct request process
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process/post/requestBody/content/application~1json/schema/allOf/0'
+                - required:
+                    - open_slots
+      responses:
+        '200':
+          description: Direct request process changed
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process/get/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+  '/api/categories/{category_id}/entries/{entry_id}/process/requests':
+    get:
+      tags:
+        - direct_requests
+      description: Returns all direct requests of an entry
+      operationId: getDirectRequests
+      summary: /api/categories/<category_id>/entries/<entry_id>/process/requests
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/after'
+      responses:
+        '200':
+          description: List of direct requests of the specified entry
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1claim/post/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+    patch:
+      tags:
+        - direct_requests
+      description: Changes the details of a direct request
+      operationId: patchDirectRequests
+      summary: /api/categories/<category_id>/entries/<entry_id>/process/requests
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      requestBody:
+        description: changed details of the direct request
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: long
+                      example: 3
+                - type: object
+                  properties:
+                    state:
+                      type: string
+                      enum:
+                        - ACCEPTED
+                        - DECLINED
+                        - PENDING
+                      required: true
+                - required:
+                    - id
+                    - state
+      responses:
+        '200':
+          description: Changed direct request
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1claim/post/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+  '/api/categories/{category_id}/entries/{entry_id}/process/claim':
+    post:
+      tags:
+        - direct_requests
+      description: Claims an open slot
+      operationId: claimDirectRequests
+      summary: /api/categories/<category_id>/entries/<entry_id>/process/claim
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+      responses:
+        '200':
+          description: Claimed open slot
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1requests/patch/requestBody/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1requests/patch/requestBody/content/application~1json/schema/allOf/1'
+                  - $ref: '#/components/schemas/Review/allOf/1'
+                  - type: object
+                    properties:
+                      direct_request_process_id:
+                        type: long
+                        example: 3
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
+  '/api/categories/{category_id}/entries/{entry_id}/process/requests/{request_id}':
+    delete:
+      tags:
+        - direct_requests
+      description: deletes a direct request only if request is not accepted
+      operationId: deleteDirectRequests
+      summary: /api/categories/<category_id>/entries/<entry_id>/process/requests/<request_id>
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/request_id'
+      responses:
+        '200':
+          description: Direct request deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1claim/post/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: The requested category or entry does not exist
   /api/reviews:
     get:
       tags:
-        - reviews
-      description: Returns all reviews that are associated to the requesting user.
+        - users
+      description: Returns all reviews that are associated to the requesting user
       operationId: getUserReviews
-      summary: /reviews
+      summary: /api/reviews
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/after'
@@ -346,9 +671,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Review'
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Review'
         '400':
           description: Invalid Request
         '401':
@@ -359,7 +689,7 @@ paths:
         - reviews
       description: Returns all reviews for an entry
       operationId: getReviews
-      summary: /categories/<category_id>/entries/<entry_id>/reviews
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
@@ -371,61 +701,75 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Review'
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Review'
         '400':
           description: Invalid Request
         '401':
           description: Unauthorized
         '404':
           description: The specified entry or category does not exist
-    post:
+    patch:
       tags:
         - reviews
-      description: Creates a review for an entry
-      operationId: createReviews
+      description: Changes a review
+      operationId: patchReview
       summary: /categories/<category_id>/entries/<entry_id>/reviews
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
       requestBody:
-        description: New review
+        description: Changed details of a review. A researcher may only alter the answers_from_authors field. A reviewer may only alter every other optional field
+        required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                researcher_id:
-                  type: integer
-                  example: 100
-                researcher:
-                  anyOf:
-                    - $ref: '#/components/schemas/User'
-                    - type: object
-                      nullable: true
-                reviewer_id:
-                  type: integer
-                  example: 200
-                reviewer:
-                  anyOf:
-                    - $ref: '#/components/schemas/User'
-                    - type: object
-                      nullable: true
-                estimated_time:
-                  description: Time when the reviewer thinks they have finished the review
-                  type: string
-                  example: 'Tue, 29. Nov 2022'
-                  format: 'ddd, dd. mmm yyyy'
-                pdf_review:
-                  description: The PDF-file of the research paper but filled with comments
-                  type: object
-                  nullable: true
-                review_form:
-                  $ref: '#/components/schemas/Review%20Form'
+              allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: long
+                      example: 42324
+                - type: object
+                  properties:
+                    confidence_level:
+                      type: string
+                      enum:
+                        - Low
+                        - Medium
+                        - High
+                    summary:
+                      type: string
+                      example: mitochondria the powerhouse of the cell
+                    main_weaknesses:
+                      type: string
+                      example: unclear structure
+                    main_strengths:
+                      type: string
+                      example: good language
+                    questions_for_authors:
+                      type: string
+                      example: What is the meaning of life?
+                    answers_from_authors:
+                      type: string
+                      example: The answer would be 42
+                    other_comments:
+                      type: string
+                      example: I like the design
+                    score:
+                      type: integer
+                      example: 2.25
+                - required:
+                    - id
       responses:
         '200':
-          description: Review created
+          description: Review changed
           content:
             application/json:
               schema:
@@ -435,23 +779,18 @@ paths:
         '401':
           description: Unauthorized
         '404':
-          description: The specified entry or category does not exist
+          description: 'The specified review, entry or category does not exist'
   '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}':
     get:
       tags:
         - reviews
       description: Returns a review from an entry
       operationId: getReview
-      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - name: review_id
-          in: path
-          required: true
-          description: The id of a review
-          schema:
-            type: string
+        - $ref: '#/components/parameters/review_id'
       responses:
         '200':
           description: Review of the specified entry
@@ -465,66 +804,17 @@ paths:
           description: Unauthorized
         '404':
           description: 'The specified review, entry or category does not exist'
-    patch:
-      tags:
-        - reviews
-      description: Updates a review form
-      operationId: patchReview
-      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>
-      parameters:
-        - $ref: '#/components/parameters/category_id'
-        - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
-      requestBody:
-        description: Changes of the review form
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Review%20Form'
-      responses:
-        '200':
-          description: Review form edited
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Review'
-        '400':
-          description: Invalid Request
-        '401':
-          description: Unauthorized
-        '404':
-          description: 'The specified review, entry or category does not exist'
-    delete:
-      tags:
-        - reviews
-      description: Deletes a review form
-      operationId: deleteReview
-      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>
-      parameters:
-        - $ref: '#/components/parameters/category_id'
-        - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
-      responses:
-        '200':
-          description: Review deleted
-        '400':
-          description: Invalid Request
-        '401':
-          description: Unauthorized
-        '404':
-          description: 'The specified review, entry or category does not exist'
   '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document':
     get:
       tags:
         - reviews
       description: Returns the documents attached to the review
       operationId: getReviewDocument
-      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>/documents
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/components/parameters/review_id'
       responses:
         '200':
           description: Document
@@ -538,16 +828,16 @@ paths:
           description: Unauthorized
         '404':
           description: 'There is no document attached to this review or the specified review, entry or category does not exist'
-    put:
+    post:
       tags:
         - reviews
       description: Attaches a document to a review
       operationId: addReviewDocument
-      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/components/parameters/review_id'
       requestBody:
         description: new document
         content:
@@ -568,11 +858,11 @@ paths:
         - reviews
       description: Deletes a document attached to an review
       operationId: deleteReviewDocument
-      summary: /categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D/get/parameters/2'
+        - $ref: '#/components/parameters/review_id'
       responses:
         '200':
           description: Document successfully deleted
@@ -582,80 +872,161 @@ paths:
           description: Unauthorized
         '404':
           description: 'The specified review, entry or category does not exist'
-  '/api/users/{user_id}/entries':
+  '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages':
     get:
       tags:
-        - users
-      description: Returns all entries of a user
-      operationId: getUserEntries
-      summary: /users/<user_id>/entries
+        - messages
+      description: Returns all messages of a review
+      operationId: getMessage
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages
       parameters:
-        - $ref: '#/paths/~1api~1users~1%7Buser_id%7D/get/parameters/0'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/after'
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/review_id'
       responses:
         '200':
-          description: List of entries created by the specified user
+          description: List of messages for the specified review
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages~1%7Bmessage_id%7D/delete/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'The specified review, entry or category does not exist'
+    post:
+      tags:
+        - messages
+      description: Adds a message to the message board of a review
+      operationId: createMessage
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/review_id'
+      requestBody:
+        description: New message
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  properties:
+                    timestamp:
+                      type: string
+                      example: '2021-03-23T10:43:32+02:00'
+                      format: 'yyyy-mm-ddTh:min:sec+[timezone]'
+                - type: object
+                  properties:
+                    content:
+                      type: string
+                      example: What do you mean at line 2345?
+                - required:
+                    - timestamp
+                    - content
+      responses:
+        '200':
+          description: Message created
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Entry'
-  '/api/users/{user_id}':
-    get:
+                  $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages~1%7Bmessage_id%7D/delete/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'The requested category, entry or review does not exist'
+    patch:
       tags:
-        - users
-      description: Show the account details of a user
-      operationId: getUser
-      summary: /users/<user_id>
+        - messages
+      description: Changes a message
+      operationId: patchMessage
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages
       parameters:
-        - name: user_id
-          in: path
-          required: true
-          description: The id of a user
-          schema:
-            type: string
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/review_id'
+      requestBody:
+        description: Changed details of the message
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  properties:
+                    id:
+                      type: long
+                      example: 123123
+                - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages/post/requestBody/content/application~1json/schema/allOf/1'
+                - required:
+                    - id
       responses:
         '200':
-          description: Account details of a user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-  /api/users/self:
-    get:
-      tags:
-        - users
-      description: Show the account details of the requesting user
-      operationId: getUserSelf
-      summary: /users/self
-      responses:
-        '200':
-          description: Account details of the requesting user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-  /api/users/self/entries:
-    get:
-      tags:
-        - users
-      description: Returns all entries of the requesting user user
-      operationId: getUserSelfEntries
-      summary: /users/self/entries
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/after'
-      responses:
-        '200':
-          description: List of entries created by the requesting user
+          description: Message changed
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Entry'
+                  $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages~1%7Bmessage_id%7D/delete/responses/200/content/application~1json/schema'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'The requested category, entry or review does not exist'
+  '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages/{message_id}':
+    delete:
+      tags:
+        - messages
+      description: Deletes a message
+      operationId: deleteMessage
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages/<message_id>
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/review_id'
+        - $ref: '#/components/parameters/message_id'
+      responses:
+        '200':
+          description: Deleted message
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages/patch/requestBody/content/application~1json/schema/allOf/0'
+                  - type: object
+                    properties:
+                      review_id:
+                        type: long
+                        example: 42324
+                  - type: object
+                    properties:
+                      creator_id:
+                        type: string
+                        example: 42fsf234
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages/post/requestBody/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews~1%7Breview_id%7D~1messages/post/requestBody/content/application~1json/schema/allOf/1'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'The specified review, entry or category does not exist'
 components:
   parameters:
     category_id:
@@ -670,6 +1041,27 @@ components:
       in: path
       required: true
       description: The id of an entry
+      schema:
+        type: string
+    request_id:
+      name: request_id
+      in: path
+      required: true
+      description: The id of a request
+      schema:
+        type: string
+    review_id:
+      name: review_id
+      in: path
+      required: true
+      description: The id of a review
+      schema:
+        type: string
+    message_id:
+      name: message_id
+      in: path
+      required: true
+      description: The id of a message
       schema:
         type: string
     limit:
@@ -699,7 +1091,7 @@ components:
       description: entity id of last entity from last page
       required: false
       schema:
-        type: integer
+        type: long
   schemas:
     Error:
       type: object
@@ -714,20 +1106,24 @@ components:
           type: string
     Entry:
       allOf:
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries/patch/requestBody/content/application~1json/schema/allOf/0'
         - type: object
           properties:
-            id:
-              type: integer
+            category_id:
+              type: long
               example: 42
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D/patch/requestBody/content/application~1json/schema'
+        - type: object
+          properties:
+            researcher_id:
+              type: string
+              example: '42'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries/post/requestBody/content/application~1json/schema/items/allOf/0'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries/patch/requestBody/content/application~1json/schema/allOf/1'
     Category:
       allOf:
-        - type: object
-          properties:
-            id:
-              type: integer
-              example: 42
-        - $ref: '#/paths/~1api~1categories/post/requestBody/content/application~1json/schema'
+        - $ref: '#/paths/~1api~1categories/patch/requestBody/content/application~1json/schema/allOf/0'
+        - $ref: '#/components/schemas/Entry/allOf/2'
+        - $ref: '#/paths/~1api~1categories/post/requestBody/content/application~1json/schema/allOf/0'
     User:
       type: object
       properties:
@@ -742,46 +1138,23 @@ components:
           example: roosevelt.booth@example.org
     Review:
       allOf:
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews/patch/requestBody/content/application~1json/schema/allOf/0'
         - type: object
           properties:
-            id:
-              type: integer
-              example: 42
+            reviewer_id:
+              type: string
+              example: '23'
+        - type: object
+          properties:
             entry_id:
-              type: integer
-              example: 100
-            entry:
-              $ref: '#/components/schemas/Entry'
-        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews/post/requestBody/content/application~1json/schema'
-    Review Form:
-      type: object
-      properties:
-        score:
-          type: integer
-        confidence:
-          type: string
-          enum:
-            - Low
-            - Medium
-            - High
-        summary_of_paper:
-          type: string
-          example: mitochondria the powerhouse of the cell
-        main_weaknesses:
-          type: string
-          example: unclear structure
-        main_strengths:
-          type: string
-          example: good language
-        other_comments:
-          type: string
-          example: I like the design
-        open_questions:
-          type: string
-          example: What is the meaning of life?
-        answers:
-          type: string
-          example: The answer would be 42
+              type: long
+              example: 42
+        - type: object
+          properties:
+            review_document_id:
+              type: string
+              example: '421230'
+        - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1reviews/patch/requestBody/content/application~1json/schema/allOf/1'
   responses:
     UnexpectedError:
       description: unexpected error
