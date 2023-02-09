@@ -720,7 +720,7 @@ paths:
         - reviews
       description: Changes a review
       operationId: patchReview
-      summary: /categories/<category_id>/entries/<entry_id>/reviews
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews
       parameters:
         - $ref: '#/components/parameters/category_id'
         - $ref: '#/components/parameters/entry_id'
