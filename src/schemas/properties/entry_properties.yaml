@@ -1,21 +1,8 @@
 type: object
 properties:
-  title:
+  name:
     type: string
     example: "Great Paper #01"
-  researcher_id:
-    type: integer
-    example: 100
-  researcher_name:
-    type: string
-    example: "Karol Bender"
-  category_id:
-    type: integer
-    example: 5
   authors: 
     type: string
-    example: "Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez"
-  slots:
-    type: integer
-    example: 2
-    nullable: true
+    example: "Smitty Werben Jagger Man Jensen, Ada Wong, David Martinez"  

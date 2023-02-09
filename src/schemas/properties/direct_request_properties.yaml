@@ -1,0 +1,6 @@
+type: object
+properties:
+  state:
+    type: string
+    enum: [ "ACCEPTED", "DECLINED", "PENDING" ]
+    required: true

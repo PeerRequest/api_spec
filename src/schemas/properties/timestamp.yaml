@@ -1,0 +1,6 @@
+type: object
+properties:
+  timestamp:
+    type: string
+    example: "2021-03-23T10:43:32+02:00"
+    format: "yyyy-mm-ddTh:min:sec+[timezone]"

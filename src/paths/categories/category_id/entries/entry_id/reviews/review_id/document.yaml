@@ -3,7 +3,7 @@ get:
     - reviews
   description: "Returns the documents attached to the review"
   operationId: getReviewDocument
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/documents"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
@@ -26,12 +26,12 @@ get:
     404:
       description: "There is no document attached to this review or the specified review, entry or category does not exist"
 
-put:
+post:
   tags:
     - reviews
   description: "Attaches a document to a review"
   operationId: addReviewDocument
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"
@@ -62,7 +62,7 @@ delete:
     - reviews
   description: "Deletes a document attached to an review"
   operationId: deleteReviewDocument
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/document"
   parameters:
     - $ref: "../../../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../../../parameters/path/entry_id.yaml"

@@ -3,7 +3,7 @@ get:
     - reviews
   description: "Returns all reviews for an entry"
   operationId: getReviews
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
@@ -16,9 +16,14 @@ get:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: "../../../../../schemas/review.yaml"
+            allOf:
+              - $ref: "../../../../../schemas/page.yaml"
+              - type object:
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: "../../../../../schemas/review.yaml"
 
     400:
       description: "Invalid Request"
@@ -29,26 +34,30 @@ get:
     404:
       description: "The specified entry or category does not exist"
 
-post:
+patch:
   tags:
     - reviews
-  description: "Creates a review for an entry"
-  operationId: createReviews
+  description: "Changes a review"
+  operationId: patchReview
   summary: "/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   requestBody:
-    description: "New review"
+    description: "Changed details of a review. A researcher may only alter the answers_from_authors field. A reviewer may only alter every other optional field"
+    required: true
     content:
       application/json:
         schema:
-          $ref: "../../../../../schemas/properties/review_properties.yaml"
+          allOf:
+            - $ref: "../../../../../schemas/properties/review_id.yaml"
+            - $ref: "../../../../../schemas/properties/review_properties.yaml"
+            - required: ["id"]
 
   responses:
     200:
-      description: "Review created"
+      description: "Review changed"
       content:
         application/json:
           schema:
@@ -61,4 +70,4 @@ post:
       description: "Unauthorized"
 
     404:
-      description: "The specified entry or category does not exist"
+      description: "The specified review, entry or category does not exist"

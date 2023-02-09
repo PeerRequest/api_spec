@@ -7,25 +7,25 @@ info:
   # TODO: add servers here
 
 tags:
-  - name: auth
   - name: categories
   - name: entries
+  - name: direct_requests
   - name: reviews
+  - name: messages
   - name: users
 
 paths:
-  # auth endpoints
-  /api/logout:
-    $ref: "./paths/auth/logout.yaml"
-
-    # category endpoints
+  # category endpoints
   /api/categories:
     $ref: "./paths/categories.yaml"
 
   /api/categories/{category_id}:
     $ref: "./paths/categories/category_id/category.yaml"
 
-    # entry endpoints
+  # entry endpoints
+  /api/entries:
+    $ref: "./paths/entries.yaml"
+
   /api/categories/{category_id}/entries:
     $ref: "./paths/categories/category_id/entries.yaml"
 
@@ -35,7 +35,23 @@ paths:
   /api/categories/{category_id}/entries/{entry_id}/paper:
     $ref: "./paths/categories/category_id/entries/entry_id/paper.yaml"
 
-    # review endpoints
+  # direct request controller
+  /api/requests:
+    $ref: "./paths/requests.yaml"
+
+  /api/categories/{category_id}/entries/{entry_id}/process:
+    $ref: "./paths/categories/category_id/entries/entry_id/process.yaml"
+
+  /api/categories/{category_id}/entries/{entry_id}/process/requests:
+    $ref: "./paths/categories/category_id/entries/entry_id/process/requests.yaml"
+
+  /api/categories/{category_id}/entries/{entry_id}/process/claim:
+    $ref: "./paths/categories/category_id/entries/entry_id/process/claim.yaml"
+
+  /api/categories/{category_id}/entries/{entry_id}/process/requests/{request_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/process/requests/request_id/request.yaml"
+
+  # review endpoints
   /api/reviews:
     $ref: "./paths/reviews.yaml"
 
@@ -47,19 +63,15 @@ paths:
 
   /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
+  
+  # message endpoints
+  /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/messages.yaml"
 
-    # user endpoints
-  /api/users/{user_id}/entries:
-    $ref: "./paths/users/user_id/entries.yaml"
+  /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages/{message_id}:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/messages/message_id/message.yaml"
 
-  /api/users/{user_id}:
-    $ref: "./paths/users/user_id/user.yaml"
-
-  /api/users/self:
-    $ref: "./paths/users/self.yaml"
-
-  /api/users/self/entries:
-    $ref: "./paths/users/self/entries.yaml"
+  # user endpoints
 
 components:
   parameters:

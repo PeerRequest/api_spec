@@ -1,0 +1,5 @@
+type: object
+properties:
+  direct_request_process_id:
+    type: long
+    example: 3

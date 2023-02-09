@@ -1,0 +1,28 @@
+delete:
+  tags:
+    - messages
+  description: "Deletes a message"
+  operationId: deleteMessage
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/messages/<message_id>"
+  parameters:
+    - $ref: "../../../../../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../../../../../parameters/path/entry_id.yaml"
+    - $ref: "../../../../../../../../../parameters/path/review_id.yaml"
+    - $ref: "../../../../../../../../../parameters/path/message_id.yaml"
+
+  responses:
+    200:
+      description: "Deleted message"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../../../../../schemas/message.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The specified review, entry or category does not exist"

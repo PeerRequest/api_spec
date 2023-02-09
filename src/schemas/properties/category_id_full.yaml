@@ -1,0 +1,5 @@
+type: object
+properties:
+  category_id:
+    type: long
+    example: 42

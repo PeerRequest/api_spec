@@ -1,29 +1,26 @@
 type: object
 properties:
-  researcher_id:
-    type: integer
-    example: 100
-  researcher:
-    anyOf:
-      - $ref: "../user.yaml"
-      - type: object
-        nullable: true
-  reviewer_id:
-    type: integer
-    example: 200
-  reviewer:
-    anyOf:
-      - $ref: "../user.yaml"
-      - type: object
-        nullable: true
-  estimated_time:
-    description: "Time when the reviewer thinks they have finished the review"
+  confidence_level:
     type: string
-    example: "Tue, 29. Nov 2022"
-    format: "ddd, dd. mmm yyyy"
-  pdf_review:
-    description: "The PDF-file of the research paper but filled with comments"
-    type: object
-    nullable: true
-  review_form:
-    $ref: '../review_form.yaml'
+    enum: [ "Low", "Medium", "High" ]
+  summary:
+    type: string
+    example: "mitochondria the powerhouse of the cell"
+  main_weaknesses:
+    type: string
+    example: "unclear structure"
+  main_strengths:
+    type: string
+    example: "good language"
+  questions_for_authors:
+    type: string
+    example: "What is the meaning of life?"
+  answers_from_authors:
+    type: string
+    example: "The answer would be 42"
+  other_comments:
+    type: string
+    example: "I like the design"
+  score:
+    type: integer
+    example: 2.25

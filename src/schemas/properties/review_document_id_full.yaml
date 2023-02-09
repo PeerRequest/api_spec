@@ -1,0 +1,5 @@
+type: object
+properties:
+  review_document_id:
+    type: string
+    example: "421230"

@@ -1,9 +1,0 @@
-get:
-  tags:
-    - auth
-  description: "Logout the current user"
-  operationId: logout
-  summary: "/auth/logout"
-  responses:
-    200:
-      description: User successfully logged out

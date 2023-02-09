@@ -4,7 +4,7 @@ get:
     - entries
   description: "Returns all entries in a category"
   operationId: getEntries
-  summary: "/categories/<category_id>/entries"
+  summary: "/api/categories/<category_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
     - $ref: "../../../parameters/query/limit.yaml"
@@ -13,6 +13,53 @@ get:
   responses:
     200:
       description: "List of entries of the specified category"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../../../schemas/page.yaml"
+              - type object:
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: "../../../schemas/entry.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category does not exist"     
+
+#create entry
+post:
+  tags:
+    - entries
+  description: "Adds one or more new entries to a category"
+  operationId: createEntry
+  summary: "/api/categories/<category_id>/entries"
+  parameters:
+    - $ref: "../../../parameters/path/category_id.yaml"
+
+  requestBody:
+    description: "New entry/entries"
+    required: true
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            allOf:
+              - $ref: "../../../schemas/properties/document_id_full.yaml"
+              - $ref: "../../../schemas/properties/entry_properties.yaml"
+              - required: ["name", "document_id"]
+
+  responses:
+    200:
+      description: "Entry/Entries created"
       content:
         application/json:
           schema:
@@ -29,29 +76,35 @@ get:
     404:
       description: "The requested category does not exist"
 
-#create entry
-post:
+#update entry
+patch:
   tags:
     - entries
-  description: "Adds one or more new entries to a category"
-  operationId: createEntry
-  summary: "/categories/<category_id>/entries"
+  description: "Changes details of an entry"
+  operationId: patchEntry
+  summary: "/api/categories/<category_id>/entries"
   parameters:
     - $ref: "../../../parameters/path/category_id.yaml"
+    - $ref: "../../../parameters/path/entry_id.yaml"
 
   requestBody:
-    description: "New entry/entries"
+    description: "Changed details of the entry"
     required: true
     content:
       application/json:
         schema:
-          type: array
-          items:
-            $ref: "../../../schemas/properties/entry_properties.yaml"
+          allOf:
+            - $ref: "../../../schemas/properties/entry_id.yaml"
+            - $ref: "../../../schemas/properties/entry_properties.yaml"
+            - required: ["id"]
 
   responses:
     200:
-      description: "Entry/Entries created"
+      description: "Entry changed"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../schemas/entry.yaml"
 
     400:
       description: "Invalid Request"
@@ -60,4 +113,4 @@ post:
       description: "Unauthorized"
 
     404:
-      description: "The requested category does not exist"
+      description: "The requested category or entry does not exist"
