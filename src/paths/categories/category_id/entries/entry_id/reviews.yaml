@@ -39,7 +39,7 @@ patch:
     - reviews
   description: "Changes a review"
   operationId: patchReview
-  summary: "/categories/<category_id>/entries/<entry_id>/reviews"
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
