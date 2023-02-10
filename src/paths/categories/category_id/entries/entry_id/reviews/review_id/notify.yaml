@@ -1,0 +1,23 @@
+post:
+  tags:
+    - reviews
+  description: "Notifies a researcher or reviewer about an edit of the review form"
+  operationId: notifyReview
+  summary: "/api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/notify"
+  parameters:
+    - $ref: "../../../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../../../parameters/path/entry_id.yaml"
+    - $ref: "../../../../../../../parameters/path/review_id.yaml"
+
+  responses:
+    200:
+      description: "Notified successfully"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The specified review, entry or category does not exist"
