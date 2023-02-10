@@ -34,6 +34,43 @@ get:
     404:
       description: "The requested category or entry does not exist"
 
+post:
+  tags:
+    - direct_requests
+  description: "Creates a direct request"
+  operationId: patchDirectRequests
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process/requests"
+  parameters:
+    - $ref: "../../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../../parameters/path/entry_id.yaml"
+
+  requestBody:
+    description: "changed details of the direct request"
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../../../../../schemas/properties/reviewer_id.yaml"
+            - required: ["reviewer_id"]
+
+  responses:
+    200:
+      description: "Changed direct request"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../../schemas/direct_request.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"      
+
 patch:
   tags:
     - direct_requests
