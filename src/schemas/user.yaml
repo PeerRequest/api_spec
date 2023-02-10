@@ -3,9 +3,12 @@ properties:
   id:
     type: integer
     example: 42
-  name:
+  first_name:
     type: string
-    example: "Roosevelt Booth"
+    example: "Roosevelt"
+  last_name:
+    type: string
+    example: "Booth"
   email:
     type: string
     example: "roosevelt.booth@example.org"

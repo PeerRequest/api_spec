@@ -1,0 +1,23 @@
+get:
+  tags:
+    - users
+  description: "Returns a user"
+  operationId: getUser
+  summary: "/api/user/<user_id>"
+  parameters:
+    - $ref: "../../../parameters/path/user_id.yaml"
+
+  responses:
+    200:
+      description: "specified user"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../../../schemas/user.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"

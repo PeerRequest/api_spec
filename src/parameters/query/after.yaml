@@ -1,6 +1,6 @@
-name: after
+name: page
 in: query
-description: entity id of last entity from last page
+description: page to get
 required: false
 schema:
-  type: long
+  type: integer
