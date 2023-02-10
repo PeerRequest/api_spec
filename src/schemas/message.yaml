@@ -1,0 +1,6 @@
+allOf:
+  - $ref: "./properties/message_id.yaml"
+  - $ref: "./properties/review_id_full.yaml"
+  - $ref: "./properties/creator_id.yaml"
+  - $ref: "./properties/timestamp.yaml"
+  - $ref: "./properties/message_properties.yaml"

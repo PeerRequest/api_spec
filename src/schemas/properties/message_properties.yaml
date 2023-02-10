@@ -1,0 +1,5 @@
+type: object
+properties:
+  content:
+    type: string
+    example: "What do you mean at line 2345?"

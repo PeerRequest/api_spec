@@ -1,0 +1,5 @@
+type: object
+properties:
+  review_id:
+    type: long
+    example: 42324

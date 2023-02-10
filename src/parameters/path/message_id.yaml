@@ -1,0 +1,6 @@
+name: message_id
+in: path
+required: true
+description: The id of a message
+schema:
+  type: string

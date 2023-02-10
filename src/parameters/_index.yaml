@@ -3,6 +3,12 @@ category_id:
   $ref: './path/category_id.yaml'
 entry_id:
   $ref: './path/entry_id.yaml'
+request_id:
+  $ref: './path/request_id.yaml'
+review_id:
+  $ref: './path/review_id.yaml'
+message_id:
+  $ref: './path/message_id.yaml'
 
 # query
 limit:

@@ -1,0 +1,5 @@
+type: object
+properties:
+  reviewer_id:
+    type: string
+    example: "23"

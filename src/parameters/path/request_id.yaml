@@ -1,0 +1,6 @@
+name: request_id
+in: path
+required: true
+description: The id of a request
+schema:
+  type: string

@@ -1,0 +1,100 @@
+get:
+  tags:
+    - direct_requests
+  description: "Returns the direct request process of an entry"
+  operationId: getDirectRequestProcess
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process"
+  parameters:
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
+
+  responses:
+    200:
+      description: "Specified direct request process"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../schemas/direct_request_process.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"
+
+post:
+  tags:
+    - direct_requests
+  description: "Adds a direct request process to an entry"
+  operationId: createDirectRequestProcess
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process"
+  parameters:
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
+
+  requestBody:
+    description: "New direct request process"
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../../../../schemas/properties/direct_request_process_properties.yaml"
+            - required: ["open_slots"]
+
+  responses:
+    200:
+      description: "Direct request process created"
+      content:
+        application/json:
+          schema:
+              $ref: "../../../../../schemas/direct_request_process.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"
+
+patch:
+  tags:
+    - direct_requests
+  description: "Changes a direct request process"
+  operationId: patchDirectRequestProcess
+  summary: "/api/categories/<category_id>/entries/<entry_id>/process"
+  parameters:
+    - $ref: "../../../../../parameters/path/category_id.yaml"
+    - $ref: "../../../../../parameters/path/entry_id.yaml"
+
+  requestBody:
+    description: "changed details of the direct request process"
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../../../../../schemas/properties/direct_request_process_properties.yaml"
+            - required: ["open_slots"]
+
+  responses:
+    200:
+      description: "Direct request process changed"
+      content:
+        application/json:
+          schema:
+              $ref: "../../../../../schemas/direct_request_process.yaml"
+
+    400:
+      description: "Invalid Request"
+
+    401:
+      description: "Unauthorized"
+
+    404:
+      description: "The requested category or entry does not exist"

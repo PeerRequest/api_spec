@@ -4,50 +4,14 @@ get:
     - entries
   description: "Returns one entry from a category"
   operationId: getEntry
-  summary: "/categories/<category_id>/entries/<entry_id>"
+  summary: "/api/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   responses:
     200:
-      description: "Entry of the specified category"
-      content:
-        application/json:
-          schema:
-            $ref: "../../../../../schemas/entry.yaml"
-
-    400:
-      description: "Invalid Request"
-
-    401:
-      description: "Unauthorized"
-
-    404:
-      description: "The requested category or entry does not exist"
-
-#update entry
-patch:
-  tags:
-    - entries
-  description: "Changes details of an entry"
-  operationId: patchEntry
-  summary: "/categories/<category_id>/entries/<entry_id>"
-  parameters:
-    - $ref: "../../../../../parameters/path/category_id.yaml"
-    - $ref: "../../../../../parameters/path/entry_id.yaml"
-
-  requestBody:
-    description: "Changed details of the entry"
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../../../../../schemas/properties/entry_properties.yaml"
-
-  responses:
-    200:
-      description: "Entry edited"
+      description: "Specified Entry"
       content:
         application/json:
           schema:
@@ -68,14 +32,18 @@ delete:
     - entries
   description: "Deletes an entry"
   operationId: deleteEntry
-  summary: "/categories/<category_id>/entries/<entry_id>"
+  summary: "/api/categories/<category_id>/entries/<entry_id>"
   parameters:
     - $ref: "../../../../../parameters/path/category_id.yaml"
     - $ref: "../../../../../parameters/path/entry_id.yaml"
 
   responses:
     200:
-      description: "Entry deleted"
+      description: "Deleted Entry"
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../../schemas/entry.yaml"
 
     400:
       description: "Invalid Request"

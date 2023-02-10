@@ -1,0 +1,12 @@
+type: object
+properties:
+  page_size:
+    type: int
+    example: 100
+  current_page:
+    type: int
+    example: 2
+  last_page:
+    type: int
+    example: 40
+    

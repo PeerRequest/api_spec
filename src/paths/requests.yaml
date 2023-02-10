@@ -1,16 +1,16 @@
 get:
   tags:
     - users
-  description: "Returns all reviews that are associated to the requesting user"
-  operationId: getUserReviews
-  summary: "/api/reviews"
+  description: "Returns all requests that are associated to the requesting user"
+  operationId: getUserRequests
+  summary: "/api/requests"
   parameters:
     - $ref: "../parameters/query/limit.yaml"
     - $ref: "../parameters/query/after.yaml"
 
   responses:
     200:
-      description: "List of reviews"
+      description: "List of requests"
       content:
         application/json:
           schema:
@@ -21,7 +21,7 @@ get:
                   content:
                     type: array
                     items:
-                      $ref: "../schemas/review.yaml"
+                      $ref: "../schemas/direct_request.yaml"
 
     400:
       description: "Invalid Request"
