@@ -28,7 +28,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -191,17 +191,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - type: object
-                    properties:
-                      page_size:
-                        type: int
-                        example: 100
-                      current_page:
-                        type: int
-                        example: 2
-                      last_page:
-                        type: int
-                        example: 40
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -230,7 +220,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -413,7 +403,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -541,7 +531,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -708,7 +698,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -738,7 +728,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -908,6 +898,26 @@ paths:
           description: Unauthorized
         '404':
           description: 'The specified review, entry or category does not exist'
+  '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/notify':
+    post:
+      tags:
+        - reviews
+      description: Notifies a researcher or reviewer about an edit of the review form
+      operationId: notifyReview
+      summary: /api/categories/<category_id>/entries/<entry_id>/reviews/<review_id>/notify
+      parameters:
+        - $ref: '#/components/parameters/category_id'
+        - $ref: '#/components/parameters/entry_id'
+        - $ref: '#/components/parameters/review_id'
+      responses:
+        '200':
+          description: Notified successfully
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: 'The specified review, entry or category does not exist'
   '/api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages':
     get:
       tags:
@@ -926,7 +936,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/paths/~1api~1entries/get/responses/200/content/application~1json/schema/allOf/0'
+                  - $ref: '#/paths/~1api~1users/get/responses/200/content/application~1json/schema/allOf/0'
                   - type object: null
                     properties:
                       content:
@@ -1063,6 +1073,70 @@ paths:
           description: Unauthorized
         '404':
           description: 'The specified review, entry or category does not exist'
+  /api/users:
+    get:
+      tags:
+        - users
+      description: Returns all users
+      operationId: getUsers
+      summary: /api/users
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/after'
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      page_size:
+                        type: int
+                        example: 100
+                      current_page:
+                        type: int
+                        example: 2
+                      last_page:
+                        type: int
+                        example: 40
+                  - type object: null
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
+  '/api/users/{user_id}':
+    get:
+      tags:
+        - users
+      description: Returns a user
+      operationId: getUser
+      summary: /api/user/<user_id>
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The id of a user
+          schema:
+            type: string
+      responses:
+        '200':
+          description: specified user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid Request
+        '401':
+          description: Unauthorized
 components:
   parameters:
     category_id:
@@ -1122,12 +1196,12 @@ components:
           - keycloak
           - kit
     after:
-      name: after
+      name: page
       in: query
-      description: entity id of last entity from last page
+      description: page to get
       required: false
       schema:
-        type: long
+        type: integer
   schemas:
     Error:
       type: object
@@ -1166,9 +1240,12 @@ components:
         id:
           type: integer
           example: 42
-        name:
+        first_name:
           type: string
-          example: Roosevelt Booth
+          example: Roosevelt
+        last_name:
+          type: string
+          example: Booth
         email:
           type: string
           example: roosevelt.booth@example.org
