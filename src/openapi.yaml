@@ -15,6 +15,7 @@ tags:
   - name: users
 
 paths:
+
   # category endpoints
   /api/categories:
     $ref: "./paths/categories.yaml"
@@ -63,6 +64,9 @@ paths:
 
   /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/document:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/document.yaml"
+
+  /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/notify:
+    $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/notify.yaml"
   
   # message endpoints
   /api/categories/{category_id}/entries/{entry_id}/reviews/{review_id}/messages:
@@ -72,6 +76,12 @@ paths:
     $ref: "./paths/categories/category_id/entries/entry_id/reviews/review_id/messages/message_id/message.yaml"
 
   # user endpoints
+
+  /api/users:
+    $ref: "./paths/users.yaml"
+
+  /api/users/{user_id}:
+    $ref: "./paths/users/user_id/user.yaml"
 
 components:
   parameters:
