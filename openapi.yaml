@@ -548,7 +548,7 @@ paths:
       tags:
         - direct_requests
       description: Creates a direct request
-      operationId: patchDirectRequests
+      operationId: postDirectRequests
       summary: /api/categories/<category_id>/entries/<entry_id>/process/requests
       parameters:
         - $ref: '#/components/parameters/category_id'
