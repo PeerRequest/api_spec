@@ -390,15 +390,15 @@ paths:
     get:
       tags:
         - users
-      description: Returns all requests that are associated to the requesting user
-      operationId: getUserRequests
+      description: Returns all direct requests that are associated to the requesting user
+      operationId: getUserDirectRequests
       summary: /api/requests
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/after'
       responses:
         '200':
-          description: List of requests
+          description: 'List of pair<direct_requests,entry>'
           content:
             application/json:
               schema:
@@ -408,8 +408,14 @@ paths:
                     properties:
                       content:
                         type: array
+                        description: 'Pair of <direct_request, entry>'
                         items:
-                          $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1claim/post/responses/200/content/application~1json/schema'
+                          type: object
+                          properties:
+                            first:
+                              $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1claim/post/responses/200/content/application~1json/schema'
+                            second:
+                              $ref: '#/components/schemas/Entry'
         '400':
           description: Invalid Request
         '401':
@@ -598,11 +604,6 @@ paths:
               allOf:
                 - type: object
                   properties:
-                    id:
-                      type: long
-                      example: 3
-                - type: object
-                  properties:
                     state:
                       type: string
                       enum:
@@ -611,7 +612,6 @@ paths:
                         - PENDING
                       required: true
                 - required:
-                    - id
                     - state
       responses:
         '200':
@@ -643,8 +643,12 @@ paths:
             application/json:
               schema:
                 allOf:
+                  - type: object
+                    properties:
+                      id:
+                        type: long
+                        example: 3
                   - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1requests/patch/requestBody/content/application~1json/schema/allOf/0'
-                  - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1requests/patch/requestBody/content/application~1json/schema/allOf/1'
                   - $ref: '#/paths/~1api~1categories~1%7Bcategory_id%7D~1entries~1%7Bentry_id%7D~1process~1requests/post/requestBody/content/application~1json/schema/allOf/0'
                   - type: object
                     properties:
