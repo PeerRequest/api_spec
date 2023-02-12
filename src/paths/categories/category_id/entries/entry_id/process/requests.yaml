@@ -88,9 +88,8 @@ patch:
       application/json:
         schema:
           allOf:
-            - $ref: "../../../../../../schemas/properties/direct_request_id.yaml"
             - $ref: "../../../../../../schemas/properties/direct_request_properties.yaml"
-            - required: ["id", "state"]
+            - required: ["state"]
 
   responses:
     200:

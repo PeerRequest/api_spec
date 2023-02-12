@@ -1,0 +1,6 @@
+type: object
+properties:
+  first:
+    $ref: "./direct_request.yaml"
+  second:
+    $ref: "./entry.yaml"

@@ -1,8 +1,8 @@
 get:
   tags:
     - users
-  description: "Returns all requests that are associated to the requesting user"
-  operationId: getUserRequests
+  description: "Returns all direct requests that are associated to the requesting user"
+  operationId: getUserDirectRequests
   summary: "/api/requests"
   parameters:
     - $ref: "../parameters/query/limit.yaml"
@@ -10,7 +10,7 @@ get:
 
   responses:
     200:
-      description: "List of requests"
+      description: "List of pair<direct_requests,entry>"
       content:
         application/json:
           schema:
@@ -20,8 +20,9 @@ get:
                 properties:
                   content:
                     type: array
+                    description: Pair of <direct_request, entry>
                     items:
-                      $ref: "../schemas/direct_request.yaml"
+                      $ref: "../schemas/pair_directRequest_entry.yaml"
 
     400:
       description: "Invalid Request"
