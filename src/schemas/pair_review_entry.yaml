@@ -1,0 +1,6 @@
+type: object
+properties:
+  first:
+    $ref: "./review.yaml"
+  second:
+    $ref: "./entry.yaml"
