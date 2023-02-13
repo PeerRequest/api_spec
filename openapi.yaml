@@ -697,7 +697,7 @@ paths:
         - $ref: '#/components/parameters/after'
       responses:
         '200':
-          description: List of reviews
+          description: 'Pair of <review, entry>'
           content:
             application/json:
               schema:
@@ -707,8 +707,14 @@ paths:
                     properties:
                       content:
                         type: array
+                        description: 'Pair of <review, entry>'
                         items:
-                          $ref: '#/components/schemas/Review'
+                          type: object
+                          properties:
+                            first:
+                              $ref: '#/components/schemas/Review'
+                            second:
+                              $ref: '#/components/schemas/Entry'
         '400':
           description: Invalid Request
         '401':
