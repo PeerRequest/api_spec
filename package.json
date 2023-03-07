@@ -22,6 +22,6 @@
   "dependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
     "@stoplight/spectral-cli": "^6.6.0",
-    "redoc-cli": "^0.13.20"
+    "redoc-cli": "^0.13.21"
   }
 }
